@@ -300,13 +300,18 @@
 </head>
 
 <body
+
     class="bg-background text-on-background font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container pb-20 md:pb-0">
     <div class="fixed inset-0 z-[-1] pointer-events-none">
         <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/60 to-background"></div>
-        <img class="w-full h-full object-cover opacity-40 scale-105"
+        <img loading="lazy" class="w-full h-full object-cover opacity-40 scale-105"
             data-alt="Cinematic Minecraft landscape with majestic floating islands, sunset lighting, and volumetric atmosphere with deep depth of field"
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_hU3WKZR7PHW98l0vVZedYkKP3H4biVyMgYD0yoP7Enq3b6buGCLAqrxdTYJKoEEXP4ZbgIXNWu-Kw5GtvVECjCM3of2vSdwrCrWoutGMlehMRifUevdWkxl3qgfCEmqBDiMlWIdfi_kZxEeBXWoYnbS2hiYMBIlo7FEy5pMKN33NcDR0vZaepZmjkYq6xE_LKyWrV85NFnnQGg59uAfxT9ekHKvxdjzNDuiZPx0XE2hGKXiSBmZNVZByAVMp0thMqcVYiCequH0" />
     </div>
+
+    <!-- ========================================== -->
+    <!-- DESKTOP / MAIN HEADER NAVBAR               -->
+    <!-- ========================================== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
 
@@ -314,36 +319,38 @@
             <nav
                 class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
 
+                <!-- Logo Section -->
                 <div class="flex items-center gap-3 group cursor-pointer">
-                    <div class="relative">
+                    <a href="index.html" class="relative block">
                         <div
                             class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
                         </div>
-                        <img src="logo.png" class="h-8 md:h-10 object-contain relative z-10 transition-transform "
-                            alt="Logo">
-                    </div>
+                        <img loading="lazy" src="logo.png"
+                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
+                    </a>
                 </div>
 
+                <!-- Navigation Links -->
+                <!-- NOTE: Apply 'active text-primary' to the current page -->
                 <div class="hidden md:flex items-center gap-10">
-                    <a href="#"
-                        class="nav-link active text-primary font-tech font-bold text-sm tracking-widest uppercase">Store</a>
-                    <a href="#"
+                    <a href="store.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
-                    <a href="#"
+                    <a href="vote.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
-                    <a href="#"
+                    <a href="forums.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
-                    <a href="#"
+                    <a href="wiki.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
                 </div>
 
+                <!-- Action Buttons -->
                 <div class="flex items-center gap-2">
                     <button
-                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">
-                        Login
-                    </button>
+                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">Login</button>
                     <div class="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block"></div>
-                    <button
+                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
                         class="button-shine group bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(242,202,80,0.3)] hover:shadow-primary/40 transition-all active:scale-95">
                         <span class="pixel-text text-[10px] hidden sm:block">PLAY NOW</span>
                         <span class="pixel-text text-[10px] block sm:hidden">PLAY</span>
@@ -354,6 +361,7 @@
             </nav>
         </div>
     </header>
+
     <main class="pt-32 px-4 md:px-gutter pb-stack-lg max-w-7xl mx-auto">
         <section class="flex flex-col items-center text-center mb-stack-lg min-h-[70vh] justify-center relative">
             <div class="absolute top-0 left-1/2 -translate-x-1/2 flex gap-4 opacity-50">
@@ -366,7 +374,8 @@
 
             <div class="mb-6 hero-logo relative mt-10 md:mt-0">
                 <div class="absolute inset-0 bg-primary/20 blur-[100px] rounded-full"></div>
-                <img src="logo.png" alt="Logo" class="w-40 h-40 md:w-60 md:h-60 object-contain mx-auto relative z-10" />
+                <img loading="lazy" src="logo.png" alt="Logo"
+                    class="w-40 h-40 md:w-60 md:h-60 object-contain mx-auto relative z-10" />
             </div>
 
             <div class="space-y-4 mb-8 w-full">
@@ -446,7 +455,8 @@
         <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-stack-lg">
             <div
                 class="md:col-span-2 relative glass-panel rounded-3xl group cursor-pointer aspect-[4/3] sm:aspect-video overflow-hidden border-primary/20">
-                <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50"
+                <img loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50"
                     data-alt="Epic cinematic render of a dense Minecraft forest with sunlight rays piercing through golden leaves and ancient ruins"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtqd6FsqeHQ8uhu02PguKF4aCm6EdTx-tO4Nu2EKHPmrRCckpQZOkPkXAk0Y4KXwDEeETuy4YKvBb_BjOD20T_FvOaJZ9iBvDGEz48WTNkHky6LC3aqjUTt6TGObmbK_GEKjmc3J8ThR1PA-ykuimMsRSKKjzMEVn8qqzBE_nDNJNcxC66mSRQh8Uw9n3Ql1vrBI-dUhtbsjWel5uHXw8ozr9pOYaqavKPF07K0PHfq_WFTOIy_SUj_-MoodsIA_iqoKdnR2ofvVk" />
                 <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
@@ -467,7 +477,8 @@
             </div>
             <div
                 class="md:col-span-2 relative glass-panel rounded-3xl group cursor-pointer aspect-[4/3] sm:aspect-video overflow-hidden border-tertiary/20">
-                <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50"
+                <img loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-50"
                     data-alt="Stunning Minecraft skyblock render with multiple floating islands connected by crystal bridges in a starry nebula sky"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwh-QKkFMD4uwLcwJOj5fO0X4FcnE-TdBvkGe2oT56v3wecCuC8ah4q0bVA8aWgxpJwYkS3sWYE5qcXvq18PLRBrwG2-z0fmlNIc_DwfujaU-qL6n1PB6DR5dbMcD8-mIV9HeJCibuIURyHnHV1_ACtSCn5MyR3MPFt1rkmFtAqNJFn6Zt0F5TDRtq07u69m58VL9KKip0TymKpjM_t67-tAuG4TkCJfQI_ug-DrheZfqEs8UDHtH55iDjxsZsBpAgk6B0oc56LvE" />
                 <div class="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent"></div>
@@ -488,7 +499,8 @@
             </div>
             <div
                 class="md:col-span-4 relative glass-panel rounded-3xl group cursor-pointer min-h-[16rem] overflow-hidden border-secondary/20">
-                <img class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40"
+                <img loading="lazy"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-40"
                     data-alt="Action packed Minecraft minigames arena with colorful beacons, explosions, and high-speed motion blur effects"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuwznvhYjrhYBCmOvRc4icYkmiRxkeg8fYpY-6Dy8jNKUhVJp4Aw9atTm6SKulqzQnR_4diLtshTjj1MEefZ3QL8nn_vpdNHPWQicuBDsC8Ih3tIqYnAvUCpH4ShgMZkOcsQ29bT15TrbbZknX1nC_v-ylyaif9_Q1ArR_Q4vtrcI1vAq1G6oBE6FDk0M6dhLvp3u-rrg8J2L9BtEs3i6LrCj_fSNYKDTzEe4_acK_BlQ2QdX-qYiskSWUMuEE3TbbtO0e_OhSksA" />
                 <div
@@ -660,7 +672,8 @@
                                 </div>
                                 <div
                                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden ring-4 ring-red-500/50">
-                                    <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    <img loading="lazy"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                                         data-alt="Minecraft staff render wearing high-end suit skin with red glowing particle effects in background"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDm_qrf1T2Fqp_7uPSh9Dt6LV5FYU92Xwp5L7iDm58x4275f6obviP0WKL-J7Ik6xEJBm3A-qcakqzL4YloMAAlu0RTMOsf7EKfN3WnCCgSH8qcT8pfeY-4pbH8gY8Co3H1NNCmzp86bfX3cqMDdwmpJOQ-_QFRXRvZlkf7_N2-4psinOEoWNqhex1Zq2wCHtWc6CkUtaJKirRQ5StF5nT1_U4nqD09qOaVVHtdhE62rVRRVelYZ4aPav2xetfGlhzYQ4aqNhVPk8Y" />
                                 </div>
@@ -710,7 +723,8 @@
                                 </div>
                                 <div
                                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden ring-4 ring-primary/50">
-                                    <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    <img loading="lazy"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                                         data-alt="Minecraft staff render with builder skin and golden axe in a workshop setting"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7tLTcwqF4V745KJAPI765oF9zPyIczcedPv9xSpZvur5xhsCAemuwhmSKwX2uz516_myolQWch8dPJijx25OuLLpVVl2nJc1ZuifnTpydLqQbmrghg5hcDpNjpSyYbkojWb7Xuk6l9pmL0iC02jtqK5I9vozrd6F-rwuR3K-B64ocF9gxeO8XmXUKnFwTzNkpJg2cAcSQeG6IODoSDakQ3qjZbUVVf4N5d7vUQw8AjucVLHnIPR11TwOwRoO_Algi6dRY3C34w1w" />
                                 </div>
@@ -760,7 +774,8 @@
                                 </div>
                                 <div
                                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden ring-4 ring-secondary/50">
-                                    <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    <img loading="lazy"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                                         data-alt="Minecraft staff render with technical skin and green emerald aura"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr3xmTxu-IoRC7V3Gz9kHaPN5woBa8C9ze562bDRkcOl-9-KgGaG4l1fv18jeJHOEKNuH8zAs6chg-j76W86Xutak2FMOf_ywFFcw9QzGIFfVRzrcm-G82nzvjITywygJmdSU05RL8Eznq2IJDMizhrIXcwP936muYF2btNKaCug7jA_fFIkpTk3ZlqopCJ765CkGvgHEQo8H-2m49xmGObjC8nbEKMp7nfJDxTZcQ250wkAVBsIfppir7wdJ6V1HxHRoFyU9LKaE" />
                                 </div>
@@ -809,7 +824,8 @@
                                 </div>
                                 <div
                                     class="relative w-32 h-32 md:w-40 md:h-40 rounded-2xl overflow-hidden ring-4 ring-tertiary/50">
-                                    <img class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+                                    <img loading="lazy"
+                                        class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
                                         data-alt="Minecraft staff render with moderator skin and diamond blue glow effects"
                                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaEdvOOWeoN8q721pCzXcCVTkVcdnbRIsLZTW3aX5MRL0SzZacMyZOUpMppmdOGOYOhpIRl5abWnfdDhe4HPNP460TAyNPuZ0JQglVDwqv4iHhcNhmUstfoIv_Udsyf29zCzv_NcgzAtcu4v0nDQvxA3AdwWo0RzsFydSu486mFdmBb3gY_EBzZ2k8OlZA9nIHJmD5jVrUpfjgHA8idlfS4giFybolUNAJwFFeK90b1LvgXQAPCFG_D-_iV8nCDIaJztS3NUlAM5s" />
                                 </div>
@@ -859,8 +875,8 @@
             <div class="text-center md:text-left">
                 <div
                     class="text-xl font-black text-yellow-500 font-minecraft mb-4 flex justify-center md:justify-start">
-                    <img src="logo.png" class="h-8 md:h-10 object-contain grayscale relative z-10 transition-transform"
-                        alt="Logo" />
+                    <img loading="lazy" src="logo.png"
+                        class="h-8 md:h-10 object-contain grayscale relative z-10 transition-transform" alt="Logo" />
                 </div>
                 <p class="font-tech text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">© 2026 Hypixel
                     Network. Not an official Minecraft product.</p>
@@ -890,44 +906,54 @@
         </div>
     </footer>
 
+    <!-- ========================================== -->
+    <!-- MOBILE BOTTOM NAVIGATION                   -->
+    <!-- ========================================== -->
     <nav
         class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 px-4 py-3 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
         <ul class="flex justify-between items-center max-w-sm mx-auto">
+
             <li>
-                <a href="#" class="flex flex-col items-center text-primary group transition-colors">
+                <a href="store.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
                     <span
                         class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">shopping_cart</span>
                     <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Store</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                <a href="features.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
                     <span
-                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">sports_esports</span>
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">explore</span>
                     <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Play</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                <a href="vote.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
                     <span
                         class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">how_to_vote</span>
                     <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Vote</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                <a href="forums.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
                     <span
                         class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">forum</span>
                     <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Forums</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                <a href="wiki.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
                     <span
                         class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">menu_book</span>
                     <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Wiki</span>
                 </a>
             </li>
+
         </ul>
     </nav>
 

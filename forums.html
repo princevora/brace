@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Community Forums | Hypixel Network</title>
+    <meta name="title" content="Community Forums | Hypixel Network">
+    <meta name="description"
+        content="Join the conversation. Read the latest announcements, report bugs, appeal bans, and discuss all things Hypixel Network.">
+    <meta name="theme-color" content="#f2ca50">
+
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Press+Start+2P&display=block">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=block"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#9fd8e4",
+                        "surface-container-high": "#2a2a2b",
+                        "on-tertiary": "#00363e",
+                        "inverse-on-surface": "#313031",
+                        "on-background": "#e5e2e3",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f20",
+                        "secondary": "#66dd8b",
+                        "surface-container-low": "#1c1b1c",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-secondary-fixed-variant": "#005227",
+                        "on-tertiary-fixed-variant": "#0b4e59",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-primary": "#3c2f00",
+                        "secondary-container": "#25a55a",
+                        "on-error": "#690005",
+                        "background": "#131314",
+                        "secondary-fixed": "#83fba5",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-tint": "#e9c349",
+                        "tertiary-fixed-dim": "#97d0dc",
+                        "secondary-fixed-dim": "#66dd8b",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#99907c",
+                        "on-secondary-fixed": "#00210c",
+                        "inverse-primary": "#735c00",
+                        "surface-container-highest": "#353436",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-variant": "#353436",
+                        "on-secondary-container": "#003115",
+                        "primary-container": "#d4af37",
+                        "inverse-surface": "#e5e2e3",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary-container": "#554300",
+                        "on-secondary": "#003919",
+                        "on-tertiary-container": "#074c57",
+                        "tertiary-container": "#84bcc8",
+                        "surface-dim": "#131314",
+                        "on-surface": "#e5e2e3",
+                        "outline-variant": "#4d4635",
+                        "on-tertiary-fixed": "#001f25",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#ffe088",
+                        "tertiary-fixed": "#b3ecf9",
+                        "primary": "#f2ca50",
+                        "surface-bright": "#3a393a",
+                        "surface": "#131314"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-md": "24px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "stack-lg": "48px",
+                        "stack-sm": "12px",
+                        "margin-page": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-xl": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "minecraft": ["Orbitron", "sans-serif"],
+                        "pixel": ["Press Start 2P", "monospace"],
+                        "tech": ["Rajdhani", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f2ca50;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .header-gradient {
+            background: linear-gradient(to bottom, rgba(19, 19, 20, 0.8) 0%, rgba(19, 19, 20, 0) 100%);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(20, 20, 21, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .button-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .button-shine:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+        .pixelated-border {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 0 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .minecraft-heading {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 30px rgba(242, 202, 80, 0.5);
+        }
+
+        .pixel-text {
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .forum-row {
+            transition: background-color 0.2s ease;
+        }
+
+        .forum-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-background font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container pb-20 md:pb-0">
+    <!-- Atmospheric Background Visual -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/95 to-background"></div>
+        <img loading="lazy" class="w-full h-full object-cover opacity-15 scale-105"
+            data-alt="Epic cinematic render of a grand Minecraft library or forum hall"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtqd6FsqeHQ8uhu02PguKF4aCm6EdTx-tO4Nu2EKHPmrRCckpQZOkPkXAk0Y4KXwDEeETuy4YKvBb_BjOD20T_FvOaJZ9iBvDGEz48WTNkHky6LC3aqjUTt6TGObmbK_GEKjmc3J8ThR1PA-ykuimMsRSKKjzMEVn8qqzBE_nDNJNcxC66mSRQh8Uw9n3Ql1vrBI-dUhtbsjWel5uHXw8ozr9pOYaqavKPF07K0PHfq_WFTOIy_SUj_-MoodsIA_iqoKdnR2ofvVk"
+            style="filter: hue-rotate(220deg) brightness(0.7);" />
+    </div>
+
+    <!-- ========================================== -->
+    <!-- DESKTOP / MAIN HEADER NAVBAR               -->
+    <!-- ========================================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
+            <nav
+                class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+
+                <!-- Logo Section -->
+                <div class="flex items-center gap-3 group cursor-pointer">
+                    <a href="index.html" class="relative block">
+                        <div
+                            class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
+                        </div>
+                        <img loading="lazy" src="logo.png"
+                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <!-- NOTE: Apply 'active text-primary' to the current page -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="store.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase active">Forums</a>
+                    <a href="wiki.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2">
+                    <button
+                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">Login</button>
+                    <div class="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block"></div>
+                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
+                        class="button-shine group bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(242,202,80,0.3)] hover:shadow-primary/40 transition-all active:scale-95">
+                        <span class="pixel-text text-[10px] hidden sm:block">PLAY NOW</span>
+                        <span class="pixel-text text-[10px] block sm:hidden">PLAY</span>
+                        <span
+                            class="material-symbols-outlined text-lg leading-none group-hover:translate-x-1 transition-transform">bolt</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 px-4 md:px-gutter pb-stack-lg max-w-7xl mx-auto">
+
+        <!-- Forums Hero Section -->
+        <section class="flex flex-col items-center text-center mt-8 md:mt-12 mb-10 relative">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-40 bg-primary/10 blur-[150px] rounded-full pointer-events-none">
+            </div>
+
+            <span
+                class="px-4 py-1.5 border border-primary/30 rounded-full text-xs font-tech text-primary tracking-[0.2em] whitespace-nowrap bg-primary/5 inline-block mb-4 shadow-[0_0_15px_rgba(242,202,80,0.2)]">THE
+                GRAND HALL</span>
+
+            <h1
+                class="minecraft-heading text-4xl sm:text-5xl md:text-7xl text-white tracking-tighter leading-none mb-6">
+                COMMUNITY <br /><span class="text-white drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">FORUMS</span>
+            </h1>
+
+            <!-- Global Search Bar -->
+            <div class="w-full max-w-2xl relative mt-4">
+                <input type="text" placeholder="Search discussions, members, or support threads..."
+                    class="w-full bg-zinc-950/80 border border-white/10 text-white font-tech px-6 py-4 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-zinc-500 shadow-xl">
+                <button
+                    class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center text-primary bg-primary/10 rounded-lg hover:bg-primary/20 transition-colors">
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Staff Notices / Pinned Alert -->
+        <section class="mb-10">
+            <div
+                class="glass-panel p-4 md:p-6 rounded-2xl border-l-4 border-l-red-500 border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative overflow-hidden group">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-red-500/10 blur-[80px] rounded-full pointer-events-none">
+                </div>
+                <div class="flex items-center gap-4 relative z-10">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-red-500/20 flex items-center justify-center text-red-500 shrink-0">
+                        <span class="material-symbols-outlined text-2xl animate-pulse">campaign</span>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 mb-1">
+                            <span
+                                class="px-2 py-0.5 bg-red-500 text-white text-[10px] font-black uppercase rounded font-tech">Global
+                                Notice</span>
+                            <h3 class="text-lg font-bold text-white font-tech tracking-wide">Season 4 Skyblock Reset
+                                Details</h3>
+                        </div>
+                        <p class="text-sm text-zinc-400 font-tech">The Aether Skyblock realm will be resetting this
+                            Friday at 3 PM EST. Read the full changelog and backup instructions here.</p>
+                    </div>
+                </div>
+                <a href="#"
+                    class="shrink-0 px-6 py-2 glass-panel hover:bg-red-500/20 border-red-500/30 text-white rounded-lg font-tech font-bold text-xs uppercase tracking-widest transition-colors relative z-10">Read
+                    More</a>
+            </div>
+        </section>
+
+        <!-- Main Forum Layout (Grid) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-stack-lg">
+
+            <!-- Left Column: Categories (75% width on desktop) -->
+            <div class="lg:col-span-2 space-y-8">
+
+                <!-- Category Group 1: Official Server Information -->
+                <div class="glass-panel rounded-3xl border-white/5 overflow-hidden">
+                    <div class="bg-zinc-900/50 px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary">local_police</span>
+                        <h2 class="text-lg font-bold text-white font-minecraft uppercase italic tracking-tighter">
+                            Official Information</h2>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center text-primary shadow-[0_0_10px_rgba(242,202,80,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">campaign</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-primary transition-colors">
+                                    News & Announcements</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Official server updates,
+                                    changelogs, and important news from the administration team.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">1.2k</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-tertiary/10 flex-shrink-0 flex items-center justify-center text-tertiary shadow-[0_0_10px_rgba(159,216,228,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">event_available</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-tertiary transition-colors">
+                                    Events & Giveaways</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Participate in community events,
+                                    build battles, and enter official server giveaways.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">452</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Group 2: The Community -->
+                <div class="glass-panel rounded-3xl border-white/5 overflow-hidden">
+                    <div class="bg-zinc-900/50 px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-secondary">groups</span>
+                        <h2 class="text-lg font-bold text-white font-minecraft uppercase italic tracking-tighter">The
+                            Community</h2>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-zinc-500/10 flex-shrink-0 flex items-center justify-center text-zinc-400 shadow-[0_0_10px_rgba(255,255,255,0.05)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">forum</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-white transition-colors">
+                                    General Discussion</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Talk about anything related to the
+                                    network, share your creations, and meet new players.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">18.5k</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-purple-500/10 flex-shrink-0 flex items-center justify-center text-purple-400 shadow-[0_0_10px_rgba(168,85,247,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">lightbulb</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-purple-400 transition-colors">
+                                    Suggestions</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Have a brilliant idea for the
+                                    server? Post it here and let the community vote on it.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">3.2k</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-blue-500/10 flex-shrink-0 flex items-center justify-center text-blue-400 shadow-[0_0_10px_rgba(59,130,246,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">movie</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-blue-400 transition-colors">
+                                    Media Showcase</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Share your YouTube videos,
+                                    streams, screenshots, and artwork created on the server.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">8.9k</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Group 3: Support Center -->
+                <div class="glass-panel rounded-3xl border-white/5 overflow-hidden">
+                    <div class="bg-zinc-900/50 px-6 py-4 border-b border-white/10 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-red-500">support_agent</span>
+                        <h2 class="text-lg font-bold text-white font-minecraft uppercase italic tracking-tighter">
+                            Support & Appeals</h2>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-orange-500/10 flex-shrink-0 flex items-center justify-center text-orange-400 shadow-[0_0_10px_rgba(249,115,22,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">live_help</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-orange-400 transition-colors">
+                                    Community Support</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Need help with a command or
+                                    plugin? Ask the community and staff team for assistance here.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">5.1k</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Posts</div>
+                            </div>
+                        </div>
+
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-red-500/10 flex-shrink-0 flex items-center justify-center text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">bug_report</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
+                                    Bug Reports</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Found a glitch or exploit? Report
+                                    it here. All threads are private to staff and the creator.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">Private</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Access</div>
+                            </div>
+                        </div>
+
+                        <!-- Node -->
+                        <div
+                            class="forum-row flex items-center gap-4 p-5 md:px-6 border-b border-white/5 hover:bg-white/5 cursor-pointer group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-red-500/10 flex-shrink-0 flex items-center justify-center text-red-500 shadow-[0_0_10px_rgba(239,68,68,0.1)] group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-2xl">gavel</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4
+                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
+                                    Punishment Appeals</h4>
+                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Believe you were falsely banned or
+                                    muted? Submit an appeal for the moderation team to review.</p>
+                            </div>
+                            <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
+                                <div class="text-sm font-bold text-white font-tech">Private</div>
+                                <div class="text-[10px] text-zinc-500 uppercase tracking-widest font-tech">Access</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Sidebar (25% width on desktop) -->
+            <div class="lg:col-span-1 space-y-6">
+
+                <!-- Login/Register Panel -->
+                <div
+                    class="glass-panel p-6 rounded-3xl border-primary/20 text-center relative overflow-hidden gold-glow">
+                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 blur-[50px] rounded-full"></div>
+                    <div
+                        class="w-16 h-16 rounded-full bg-zinc-900 border border-white/10 flex items-center justify-center mx-auto mb-4 relative z-10">
+                        <span class="material-symbols-outlined text-3xl text-zinc-500">person</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2 font-minecraft">Welcome Guest!</h3>
+                    <p class="text-xs text-zinc-400 font-tech mb-6 leading-relaxed">Log in or create an account to post
+                        threads, reply to discussions, and link your Minecraft character.</p>
+                    <div class="flex flex-col gap-3 relative z-10">
+                        <button
+                            class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold text-xs tracking-widest uppercase font-tech hover:scale-[1.02] active:scale-95 transition-transform shadow-[0_0_15px_rgba(242,202,80,0.3)]">Sign
+                            In</button>
+                        <button
+                            class="w-full py-3 glass-panel hover:bg-white/10 text-white border-white/20 rounded-xl font-bold text-xs tracking-widest uppercase font-tech transition-colors">Register
+                            Account</button>
+                    </div>
+                </div>
+
+                <!-- Latest Activity Preview -->
+                <div class="glass-panel rounded-3xl border-white/5 overflow-hidden">
+                    <div class="bg-zinc-900/50 px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                        <h2 class="text-sm font-bold text-white font-minecraft uppercase italic tracking-tighter">Recent
+                            Threads</h2>
+                        <span class="material-symbols-outlined text-zinc-500 text-sm">schedule</span>
+                    </div>
+                    <div class="flex flex-col p-2">
+                        <!-- Post Item -->
+                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                            <img loading="lazy" src="https://minotar.net/helm/Techno_God/32.png" alt="Avatar"
+                                class="w-8 h-8 rounded shrink-0 pixelated-border mt-0.5">
+                            <div class="overflow-hidden">
+                                <h4
+                                    class="text-sm font-bold text-white font-tech truncate group-hover:text-primary transition-colors">
+                                    Best sword enchants for PvP?</h4>
+                                <div
+                                    class="flex items-center gap-2 text-[10px] text-zinc-500 font-tech uppercase tracking-widest mt-1">
+                                    <span>Techno_God</span>
+                                    <span class="w-1 h-1 rounded-full bg-zinc-600"></span>
+                                    <span>2m ago</span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Post Item -->
+                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                            <img loading="lazy" src="https://minotar.net/helm/Notch_Fan/32.png" alt="Avatar"
+                                class="w-8 h-8 rounded shrink-0 pixelated-border mt-0.5">
+                            <div class="overflow-hidden">
+                                <h4
+                                    class="text-sm font-bold text-white font-tech truncate group-hover:text-primary transition-colors">
+                                    Looking for Skyblock Coop members!</h4>
+                                <div
+                                    class="flex items-center gap-2 text-[10px] text-zinc-500 font-tech uppercase tracking-widest mt-1">
+                                    <span>Notch_Fan</span>
+                                    <span class="w-1 h-1 rounded-full bg-zinc-600"></span>
+                                    <span>15m ago</span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Post Item -->
+                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                            <div
+                                class="w-8 h-8 rounded shrink-0 border border-red-500/50 flex items-center justify-center bg-red-500/10 mt-0.5">
+                                <span class="material-symbols-outlined text-red-500 text-sm">gavel</span>
+                            </div>
+                            <div class="overflow-hidden">
+                                <h4
+                                    class="text-sm font-bold text-red-400 font-tech truncate group-hover:text-red-300 transition-colors">
+                                    [Resolved] False Ban Appeal</h4>
+                                <div
+                                    class="flex items-center gap-2 text-[10px] text-zinc-500 font-tech uppercase tracking-widest mt-1">
+                                    <span>Vortex_Admin</span>
+                                    <span class="w-1 h-1 rounded-full bg-zinc-600"></span>
+                                    <span>1h ago</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Community Statistics -->
+                <div class="glass-panel rounded-3xl border-white/5 overflow-hidden">
+                    <div class="bg-zinc-900/50 px-5 py-4 border-b border-white/10 flex items-center justify-between">
+                        <h2 class="text-sm font-bold text-white font-minecraft uppercase italic tracking-tighter">Forum
+                            Stats</h2>
+                        <span class="material-symbols-outlined text-zinc-500 text-sm">bar_chart</span>
+                    </div>
+                    <div class="p-5 space-y-4">
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-xs text-zinc-400 font-tech uppercase tracking-widest">Total Threads</span>
+                            <span class="text-sm font-bold text-white font-minecraft">12,402</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-xs text-zinc-400 font-tech uppercase tracking-widest">Total
+                                Messages</span>
+                            <span class="text-sm font-bold text-white font-minecraft">145.8k</span>
+                        </div>
+                        <div class="flex justify-between items-center border-b border-white/5 pb-3">
+                            <span class="text-xs text-zinc-400 font-tech uppercase tracking-widest">Registered
+                                Members</span>
+                            <span class="text-sm font-bold text-primary font-minecraft">24,910</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-1">
+                            <span class="text-xs text-zinc-400 font-tech uppercase tracking-widest">Latest Member</span>
+                            <span class="text-xs font-bold text-tertiary font-tech tracking-widest">AlexSlayer99</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Guidelines Snippet -->
+                <div class="glass-panel p-5 rounded-3xl border-white/5 border-l-2 border-l-secondary">
+                    <h4
+                        class="text-sm font-bold text-white mb-2 font-tech uppercase tracking-wide flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-sm">policy</span> Forum Rules
+                    </h4>
+                    <ul class="space-y-2 text-xs text-zinc-400 font-tech mb-4">
+                        <li>1. Be respectful to all members.</li>
+                        <li>2. No spamming or double posting.</li>
+                        <li>3. Keep content PG-13 and SFW.</li>
+                        <li>4. Search before creating a new thread.</li>
+                    </ul>
+                    <a href="#"
+                        class="text-secondary font-bold text-[10px] uppercase tracking-widest hover:underline flex items-center gap-1">Read
+                        Full Guidelines <span class="material-symbols-outlined text-[10px]">arrow_forward</span></a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Discord CTA (Matching design) -->
+        <section
+            class="glass-panel rounded-3xl md:rounded-[2rem] p-8 md:p-12 mb-stack-lg border-primary/30 relative overflow-hidden text-center gold-glow mt-8">
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/10 blur-[150px] rounded-full pointer-events-none">
+            </div>
+
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <span class="material-symbols-outlined text-4xl text-primary mb-4 animate-pulse">chat</span>
+                <h2
+                    class="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter italic font-minecraft">
+                    Prefer Real-Time Chat?
+                </h2>
+                <p class="text-zinc-300 text-base md:text-lg mb-8 font-tech">
+                    Connect your Minecraft account to our Discord server for instant support, live chat, voice channels,
+                    and exclusive giveaways.
+                </p>
+
+                <button
+                    class="button-shine w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-xl font-tech font-black text-sm tracking-widest uppercase flex items-center justify-center gap-3 active:scale-95 transition-transform shadow-[0_0_20px_rgba(242,202,80,0.4)] mx-auto">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+                    </svg>
+                    LINK DISCORD ACCOUNT
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer matching index.html -->
+    <footer class="w-full border-t border-white/10 mt-10 bg-zinc-950/80 backdrop-blur-3xl pb-24 md:pb-0 relative z-40">
+        <div class="w-full px-6 md:px-16 py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <div
+                    class="text-xl font-black text-yellow-500 font-minecraft mb-4 flex justify-center md:justify-start">
+                    <img loading="lazy" src="logo.png"
+                        class="h-8 md:h-10 object-contain grayscale relative z-10 transition-transform" alt="Logo" />
+                </div>
+                <p class="font-tech text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">© 2026 Hypixel
+                    Network. Not an official Minecraft product.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Privacy Policy</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Terms of Service</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Support</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Staff Applications</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Contact</a>
+            </div>
+            <div class="flex gap-4">
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="language">language</span>
+                </div>
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="policy">policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MOBILE BOTTOM NAVIGATION                   -->
+    <!-- ========================================== -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 px-4 py-3 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <ul class="flex justify-between items-center max-w-sm mx-auto">
+
+            <li>
+                <a href="store.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">shopping_cart</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Store</span>
+                </a>
+            </li>
+            <li>
+                <a href="features.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">explore</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Play</span>
+                </a>
+            </li>
+            <li>
+                <a href="vote.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">how_to_vote</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Vote</span>
+                </a>
+            </li>
+            <li>
+                <a href="forums.html"
+                    class="flex flex-col items-center text-primary hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">forum</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Forums</span>
+                </a>
+            </li>
+            <li>
+                <a href="wiki.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">menu_book</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Wiki</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+
+    <!-- Floating Background Particles -->
+    <div class="fixed inset-0 pointer-events-none z-[1]">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 blur-sm rounded-full animate-pulse"></div>
+        <div class="absolute top-3/4 left-2/3 w-3 h-3 bg-tertiary/20 blur-md rounded-full animate-pulse"
+            style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-secondary/10 blur-sm rounded-full animate-pulse"
+            style="animation-delay: 2s"></div>
+    </div>
+
+    <!-- Toast Notification (Utility script included if needed for link copying) -->
+    <div id="copy-toast"
+        class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-[100] transform translate-y-20 hidden pointer-events-none transition-all duration-500 ease-out">
+        <div
+            class="glass-panel px-4 md:px-6 py-3 md:py-4 rounded-xl border-primary/30 shadow-[0_0_30px_rgba(242,202,80,0.2)] flex items-center gap-3 md:gap-4">
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                <span class="material-symbols-outlined text-xs md:text-sm">info</span>
+            </div>
+            <div class="flex flex-col">
+                <p class="pixel-text text-[8px] md:text-[10px] text-primary mb-1 uppercase tracking-tighter">Success</p>
+                <p id="toast-message"
+                    class="text-white font-tech font-bold text-xs md:text-sm uppercase tracking-widest">Message copied
+                </p>
+            </div>
+            <div class="ml-2 md:ml-4 h-1 w-6 md:w-8 bg-primary/20 rounded-full overflow-hidden">
+                <div class="h-full bg-primary" id="timeout"></div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes progress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+    </style>
+
+    <script>
+        // Global utility function for toast notifications
+        function showNotification(message) {
+            const toast = document.getElementById('copy-toast');
+            const messageText = document.getElementById('toast-message');
+            const tmout = toast.querySelector('#timeout');
+
+            messageText.innerText = message;
+
+            toast.classList.remove('translate-y-20', 'hidden', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            // Re-trigger animation
+            tmout.style.animation = 'none';
+            tmout.offsetHeight; /* trigger reflow */
+            tmout.style.animation = 'progress 3s linear forwards';
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'hidden', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

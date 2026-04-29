@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Vote & Rewards | Hypixel Network</title>
+    <meta name="title" content="Vote & Rewards | Hypixel Network">
+    <meta name="description"
+        content="Vote daily for the Hypixel Network to earn exclusive in-game rewards, crate keys, ranks, and help us climb the leaderboards!">
+    <meta name="theme-color" content="#f2ca50">
+
+    <link rel="icon" type="image/x-icon" href="logo.png">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Press+Start+2P&display=block">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=block"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
+        rel="stylesheet" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#9fd8e4",
+                        "surface-container-high": "#2a2a2b",
+                        "on-tertiary": "#00363e",
+                        "inverse-on-surface": "#313031",
+                        "on-background": "#e5e2e3",
+                        "error-container": "#93000a",
+                        "surface-container": "#201f20",
+                        "secondary": "#66dd8b",
+                        "surface-container-low": "#1c1b1c",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-secondary-fixed-variant": "#005227",
+                        "on-tertiary-fixed-variant": "#0b4e59",
+                        "surface-container-lowest": "#0e0e0f",
+                        "on-primary": "#3c2f00",
+                        "secondary-container": "#25a55a",
+                        "on-error": "#690005",
+                        "background": "#131314",
+                        "secondary-fixed": "#83fba5",
+                        "primary-fixed-dim": "#e9c349",
+                        "surface-tint": "#e9c349",
+                        "tertiary-fixed-dim": "#97d0dc",
+                        "secondary-fixed-dim": "#66dd8b",
+                        "on-error-container": "#ffdad6",
+                        "outline": "#99907c",
+                        "on-secondary-fixed": "#00210c",
+                        "inverse-primary": "#735c00",
+                        "surface-container-highest": "#353436",
+                        "on-surface-variant": "#d0c5af",
+                        "surface-variant": "#353436",
+                        "on-secondary-container": "#003115",
+                        "primary-container": "#d4af37",
+                        "inverse-surface": "#e5e2e3",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary-container": "#554300",
+                        "on-secondary": "#003919",
+                        "on-tertiary-container": "#074c57",
+                        "tertiary-container": "#84bcc8",
+                        "surface-dim": "#131314",
+                        "on-surface": "#e5e2e3",
+                        "outline-variant": "#4d4635",
+                        "on-tertiary-fixed": "#001f25",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#ffe088",
+                        "tertiary-fixed": "#b3ecf9",
+                        "primary": "#f2ca50",
+                        "surface-bright": "#3a393a",
+                        "surface": "#131314"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "stack-md": "24px",
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "stack-lg": "48px",
+                        "stack-sm": "12px",
+                        "margin-page": "64px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-xl": ["Space Grotesk"],
+                        "headline-lg": ["Space Grotesk"],
+                        "label-caps": ["Space Grotesk"],
+                        "headline-md": ["Space Grotesk"],
+                        "minecraft": ["Orbitron", "sans-serif"],
+                        "pixel": ["Press Start 2P", "monospace"],
+                        "tech": ["Rajdhani", "sans-serif"]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f2ca50;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .header-gradient {
+            background: linear-gradient(to bottom, rgba(19, 19, 20, 0.8) 0%, rgba(19, 19, 20, 0) 100%);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(20, 20, 21, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+
+        .button-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .button-shine:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+        .pixelated-border {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1), 0 0 0 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .minecraft-heading {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 30px rgba(242, 202, 80, 0.5);
+        }
+
+        .pixel-text {
+            font-family: 'Press Start 2P', monospace;
+            text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .vote-card {
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .vote-card:hover {
+            transform: translateY(-8px);
+            z-index: 10;
+            border-color: #f2ca50;
+            box-shadow: 0 10px 30px rgba(242, 202, 80, 0.2);
+        }
+
+        /* Custom progress bar animation */
+        @keyframes fillProgress {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 85%;
+            }
+        }
+
+        .animate-progress {
+            animation: fillProgress 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-background font-body-md overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container pb-20 md:pb-0">
+    <!-- Atmospheric Background Visual -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/90 to-background"></div>
+        <img loading="lazy" class="w-full h-full object-cover opacity-20 scale-105"
+            data-alt="Epic Minecraft render featuring floating crystal islands and glowing beacons"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDwh-QKkFMD4uwLcwJOj5fO0X4FcnE-TdBvkGe2oT56v3wecCuC8ah4q0bVA8aWgxpJwYkS3sWYE5qcXvq18PLRBrwG2-z0fmlNIc_DwfujaU-qL6n1PB6DR5dbMcD8-mIV9HeJCibuIURyHnHV1_ACtSCn5MyR3MPFt1rkmFtAqNJFn6Zt0F5TDRtq07u69m58VL9KKip0TymKpjM_t67-tAuG4TkCJfQI_ug-DrheZfqEs8UDHtH55iDjxsZsBpAgk6B0oc56LvE"
+            style="filter: hue-rotate(300deg) brightness(0.9);" />
+    </div>
+
+    <!-- ========================================== -->
+    <!-- DESKTOP / MAIN HEADER NAVBAR               -->
+    <!-- ========================================== -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
+            <nav
+                class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+
+                <!-- Logo Section -->
+                <div class="flex items-center gap-3 group cursor-pointer">
+                    <a href="index.html" class="relative block">
+                        <div
+                            class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
+                        </div>
+                        <img loading="lazy" src="logo.png"
+                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <!-- NOTE: Apply 'active text-primary' to the current page -->
+                <div class="hidden md:flex items-center gap-10">
+                    <a href="store.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase active">Vote</a>
+                    <a href="forums.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center gap-2">
+                    <button
+                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">Login</button>
+                    <div class="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block"></div>
+                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
+                        class="button-shine group bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(242,202,80,0.3)] hover:shadow-primary/40 transition-all active:scale-95">
+                        <span class="pixel-text text-[10px] hidden sm:block">PLAY NOW</span>
+                        <span class="pixel-text text-[10px] block sm:hidden">PLAY</span>
+                        <span
+                            class="material-symbols-outlined text-lg leading-none group-hover:translate-x-1 transition-transform">bolt</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="pt-32 px-4 md:px-gutter pb-stack-lg max-w-7xl mx-auto">
+
+        <!-- Vote Hero Section & Vote Party -->
+        <section class="flex flex-col items-center text-center mt-8 md:mt-12 mb-16 relative">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-40 bg-tertiary/20 blur-[150px] rounded-full pointer-events-none">
+            </div>
+
+            <span
+                class="px-4 py-1.5 border border-tertiary/30 rounded-full text-xs font-tech text-tertiary tracking-[0.2em] whitespace-nowrap bg-tertiary/5 inline-block mb-4 shadow-[0_0_15px_rgba(159,216,228,0.2)]">DAILY
+                REWARDS</span>
+
+            <h1
+                class="minecraft-heading text-4xl sm:text-5xl md:text-7xl text-white tracking-tighter leading-none mb-6">
+                VOTE & <br /><span class="text-tertiary drop-shadow-[0_0_20px_rgba(159,216,228,0.5)]">CONQUER</span>
+            </h1>
+            <p class="max-w-2xl text-zinc-400 mb-10 font-tech text-base md:text-lg px-4">
+                Help the network grow by voting on the server lists below. Enter your exact Minecraft username on each
+                site to automatically receive in-game crates, coins, and claim your spot on the leaderboard.
+            </p>
+
+            <!-- Global Vote Party Progress -->
+            <div
+                class="w-full max-w-3xl glass-panel p-6 rounded-3xl border-primary/30 relative overflow-hidden group cursor-default shadow-[0_0_20px_rgba(242,202,80,0.1)]">
+                <div class="flex justify-between items-end mb-3 relative z-10">
+                    <div class="text-left">
+                        <h3 class="text-xl font-bold text-white font-minecraft italic uppercase tracking-tight">Global
+                            Vote Party</h3>
+                        <p class="text-xs text-primary font-tech tracking-widest uppercase mt-1">Reward: 1x Legend Key
+                            to everyone online</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-black text-white font-minecraft">170<span
+                                class="text-sm text-zinc-500">/200</span></span>
+                    </div>
+                </div>
+                <div class="w-full h-4 bg-zinc-900 rounded-full overflow-hidden border border-white/10 relative z-10">
+                    <div
+                        class="h-full bg-gradient-to-r from-orange-500 via-primary to-yellow-300 rounded-full animate-progress relative shadow-[0_0_15px_rgba(242,202,80,0.6)]">
+                        <div class="absolute top-0 right-0 bottom-0 w-10 bg-gradient-to-l from-white/40 to-transparent">
+                        </div>
+                    </div>
+                </div>
+                <p class="text-[10px] text-zinc-500 font-tech uppercase tracking-widest text-center mt-4">30 votes
+                    remaining until the next party!</p>
+            </div>
+        </section>
+
+        <!-- Voting Platforms Grid -->
+        <section class="mb-stack-lg relative">
+            <div class="flex items-center gap-4 mb-8">
+                <h2
+                    class="text-2xl sm:text-3xl font-black text-white uppercase italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                    Voting Links</h2>
+                <div class="h-[1px] flex-1 bg-gradient-to-r from-white/20 to-transparent"></div>
+            </div>
+
+            <!-- Pre-Vote Username Helper -->
+            <div
+                class="mb-8 glass-panel p-4 rounded-2xl border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3 w-full">
+                    <div
+                        class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-zinc-400 shrink-0">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <input type="text" id="vote-username" placeholder="Type your username to copy easily..."
+                        class="bg-transparent border-none text-white font-tech text-base md:text-lg focus:ring-0 w-full placeholder-zinc-600 outline-none p-0">
+                </div>
+                <button onclick="copyUsername()"
+                    class="bg-white/10 hover:bg-white/20 text-white px-6 py-2 rounded-xl font-tech font-bold uppercase tracking-widest text-xs transition-colors whitespace-nowrap border border-white/10 shrink-0 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">content_copy</span> Copy
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Vote Link 1 -->
+                <div
+                    class="vote-card glass-panel rounded-3xl p-6 border-white/10 flex flex-col items-center text-center relative overflow-hidden group">
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 bg-primary/20 blur-[30px] rounded-full group-hover:bg-primary/40 transition-colors">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-4 text-2xl font-black text-zinc-500 font-minecraft shadow-inner">
+                        #1</div>
+                    <h3 class="text-lg font-bold text-white mb-1 font-tech uppercase tracking-wide">MinecraftServers
+                    </h3>
+                    <p class="text-xs text-primary font-bold font-tech mb-6 uppercase tracking-widest">Rewards: Key +
+                        $1k</p>
+                    <a href="#" target="_blank"
+                        class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold text-sm tracking-widest transition-all uppercase font-tech hover:scale-[1.02] active:scale-95 shadow-[0_0_15px_rgba(242,202,80,0.2)]">
+                        Vote Now
+                    </a>
+                </div>
+
+                <!-- Vote Link 2 -->
+                <div
+                    class="vote-card glass-panel rounded-3xl p-6 border-white/10 flex flex-col items-center text-center relative overflow-hidden group">
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 bg-secondary/20 blur-[30px] rounded-full group-hover:bg-secondary/40 transition-colors">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-4 text-2xl font-black text-zinc-500 font-minecraft shadow-inner">
+                        #2</div>
+                    <h3 class="text-lg font-bold text-white mb-1 font-tech uppercase tracking-wide">PlanetMinecraft</h3>
+                    <p class="text-xs text-secondary font-bold font-tech mb-6 uppercase tracking-widest">Rewards: Key +
+                        $1k</p>
+                    <a href="#" target="_blank"
+                        class="w-full py-3 glass-panel text-white hover:bg-white/10 border-white/20 rounded-xl font-bold text-sm tracking-widest transition-all uppercase font-tech hover:scale-[1.02] active:scale-95">
+                        Vote Now
+                    </a>
+                </div>
+
+                <!-- Vote Link 3 -->
+                <div
+                    class="vote-card glass-panel rounded-3xl p-6 border-white/10 flex flex-col items-center text-center relative overflow-hidden group">
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 bg-tertiary/20 blur-[30px] rounded-full group-hover:bg-tertiary/40 transition-colors">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-4 text-2xl font-black text-zinc-500 font-minecraft shadow-inner">
+                        #3</div>
+                    <h3 class="text-lg font-bold text-white mb-1 font-tech uppercase tracking-wide">TopG Org</h3>
+                    <p class="text-xs text-tertiary font-bold font-tech mb-6 uppercase tracking-widest">Rewards: Key +
+                        XP</p>
+                    <a href="#" target="_blank"
+                        class="w-full py-3 glass-panel text-white hover:bg-white/10 border-white/20 rounded-xl font-bold text-sm tracking-widest transition-all uppercase font-tech hover:scale-[1.02] active:scale-95">
+                        Vote Now
+                    </a>
+                </div>
+
+                <!-- Vote Link 4 -->
+                <div
+                    class="vote-card glass-panel rounded-3xl p-6 border-white/10 flex flex-col items-center text-center relative overflow-hidden group">
+                    <div
+                        class="absolute -top-10 -right-10 w-24 h-24 bg-purple-500/20 blur-[30px] rounded-full group-hover:bg-purple-500/40 transition-colors">
+                    </div>
+                    <div
+                        class="w-16 h-16 rounded-2xl bg-zinc-900 border border-white/10 flex items-center justify-center mb-4 text-2xl font-black text-zinc-500 font-minecraft shadow-inner">
+                        #4</div>
+                    <h3 class="text-lg font-bold text-white mb-1 font-tech uppercase tracking-wide">Minecraft MP</h3>
+                    <p class="text-xs text-purple-400 font-bold font-tech mb-6 uppercase tracking-widest">Rewards: Key +
+                        Loot</p>
+                    <a href="#" target="_blank"
+                        class="w-full py-3 glass-panel text-white hover:bg-white/10 border-white/20 rounded-xl font-bold text-sm tracking-widest transition-all uppercase font-tech hover:scale-[1.02] active:scale-95">
+                        Vote Now
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Rewards Breakdown (Daily & Streak) -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-stack-lg">
+
+            <!-- Standard Rewards -->
+            <div class="glass-panel p-8 rounded-3xl border-white/5 relative overflow-hidden">
+                <div class="absolute -bottom-20 -right-20 w-64 h-64 bg-secondary/10 blur-[80px] rounded-full"></div>
+                <h3 class="text-2xl font-black text-white font-minecraft italic uppercase tracking-tighter mb-2">Daily
+                    Perks</h3>
+                <p class="text-sm text-zinc-400 font-tech mb-8">What you get for every single vote submitted.</p>
+
+                <div class="space-y-4 relative z-10">
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary shrink-0">
+                            <span class="material-symbols-outlined text-2xl">key</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold font-tech uppercase tracking-wide">1x Vote Crate Key</h4>
+                            <p class="text-xs text-zinc-400 font-tech">Used at the server spawn to unlock random loot.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-secondary/20 flex items-center justify-center text-secondary shrink-0">
+                            <span class="material-symbols-outlined text-2xl">account_balance_wallet</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold font-tech uppercase tracking-wide">$1,000 Network Coins</h4>
+                            <p class="text-xs text-zinc-400 font-tech">Added directly to your global economy balance.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/5">
+                        <div
+                            class="w-12 h-12 rounded-xl bg-tertiary/20 flex items-center justify-center text-tertiary shrink-0">
+                            <span class="material-symbols-outlined text-2xl">star</span>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold font-tech uppercase tracking-wide">250 Rank XP</h4>
+                            <p class="text-xs text-zinc-400 font-tech">Helps you level up your free progression rank.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Streak Rewards -->
+            <div class="glass-panel p-8 rounded-3xl border-primary-container/20 relative overflow-hidden gold-glow">
+                <div class="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 blur-[80px] rounded-full"></div>
+                <h3 class="text-2xl font-black text-white font-minecraft italic uppercase tracking-tighter mb-2">Streak
+                    Bonuses</h3>
+                <p class="text-sm text-zinc-400 font-tech mb-8">Maintain a daily voting streak to unlock massive bonus
+                    rewards.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 relative z-10 h-full max-h-[300px]">
+                    <div
+                        class="bg-zinc-950/60 p-4 rounded-2xl border border-white/10 flex flex-col items-center text-center justify-center">
+                        <div class="text-3xl font-black text-white font-minecraft mb-2">7<span
+                                class="text-sm text-zinc-500 font-tech uppercase block">Days</span></div>
+                        <span
+                            class="px-2 py-1 bg-white/10 rounded text-[10px] font-bold text-white font-tech tracking-widest uppercase mb-2">Bonus</span>
+                        <p class="text-xs text-primary font-bold font-tech">3x Rare Keys<br />+ $10k Coins</p>
+                    </div>
+
+                    <div
+                        class="bg-zinc-950/60 p-4 rounded-2xl border border-white/10 flex flex-col items-center text-center justify-center relative shadow-[0_0_15px_rgba(255,255,255,0.05)]">
+                        <div class="text-3xl font-black text-white font-minecraft mb-2">14<span
+                                class="text-sm text-zinc-500 font-tech uppercase block">Days</span></div>
+                        <span
+                            class="px-2 py-1 bg-tertiary/20 text-tertiary rounded text-[10px] font-bold font-tech tracking-widest uppercase mb-2 border border-tertiary/30">Epic</span>
+                        <p class="text-xs text-tertiary font-bold font-tech">2x Epic Keys<br />+ Custom Tag</p>
+                    </div>
+
+                    <div
+                        class="bg-primary/10 p-4 rounded-2xl border border-primary/30 flex flex-col items-center text-center justify-center relative">
+                        <div class="absolute -top-3 right-3 text-2xl animate-bounce">🔥</div>
+                        <div
+                            class="text-3xl font-black text-primary font-minecraft mb-2 drop-shadow-[0_0_8px_rgba(242,202,80,0.6)]">
+                            30<span class="text-sm text-primary/70 font-tech uppercase block">Days</span></div>
+                        <span
+                            class="px-2 py-1 bg-primary text-black rounded text-[10px] font-black font-tech tracking-widest uppercase mb-2 shadow-[0_0_10px_rgba(242,202,80,0.5)]">Legend</span>
+                        <p class="text-xs text-white font-bold font-tech">1x Legend Key<br />+ Store Credit</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Top Monthly Voters Leaderboard -->
+        <section class="mb-stack-lg">
+            <div class="text-center mb-10">
+                <h2
+                    class="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-widest italic font-minecraft drop-shadow-[0_0_20px_rgba(242,202,80,0.2)]">
+                    Monthly Legends
+                </h2>
+                <p class="text-zinc-400 text-sm md:text-lg max-w-2xl mx-auto font-tech">
+                    The top 3 voters at the end of each month win free store credit and exclusive global ranks!
+                </p>
+            </div>
+
+            <!-- Top 3 Podium (Visual) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto items-end mb-12">
+                <!-- 2nd Place -->
+                <div
+                    class="order-2 md:order-1 glass-panel p-6 rounded-t-3xl rounded-b-xl border-t-4 border-zinc-300 text-center relative flex flex-col items-center justify-end md:h-[220px]">
+                    <div
+                        class="absolute -top-8 w-16 h-16 rounded-full bg-zinc-300 border-4 border-zinc-900 flex items-center justify-center text-zinc-900 font-black font-minecraft text-xl shadow-[0_0_15px_rgba(212,212,216,0.5)]">
+                        #2</div>
+                    <img loading="lazy" src="https://minotar.net/helm/Techno_God/64.png" alt="Player Head"
+                        class="w-16 h-16 rounded mb-4 mt-8 pixelated-border">
+                    <h3 class="text-xl font-bold text-white font-minecraft mb-1 truncate w-full">Techno_God</h3>
+                    <p class="text-zinc-400 font-tech text-sm uppercase tracking-widest mb-3">142 Votes</p>
+                    <div
+                        class="w-full py-2 bg-zinc-300/10 rounded font-tech text-zinc-300 font-bold text-xs border border-zinc-300/20">
+                        $25 Store Credit</div>
+                </div>
+
+                <!-- 1st Place -->
+                <div
+                    class="order-1 md:order-2 glass-panel p-6 rounded-t-3xl rounded-b-xl border-t-4 border-primary text-center relative flex flex-col items-center justify-end md:h-[260px] shadow-[0_-10px_30px_rgba(242,202,80,0.15)] md:-mt-8 z-10">
+                    <div
+                        class="absolute -top-10 w-20 h-20 rounded-full bg-primary border-4 border-zinc-900 flex items-center justify-center text-zinc-900 font-black font-minecraft text-3xl shadow-[0_0_20px_rgba(242,202,80,0.8)]">
+                        #1</div>
+                    <span
+                        class="material-symbols-outlined absolute top-4 text-primary text-3xl animate-pulse">social_leaderboard</span>
+                    <img loading="lazy" src="https://minotar.net/helm/Notch_Fan/64.png" alt="Player Head"
+                        class="w-20 h-20 rounded mb-4 mt-10 pixelated-border">
+                    <h3
+                        class="text-2xl font-black text-primary font-minecraft mb-1 truncate w-full drop-shadow-[0_0_5px_rgba(242,202,80,0.5)]">
+                        Notch_Fan</h3>
+                    <p class="text-zinc-300 font-tech text-sm uppercase tracking-widest mb-4">155 Votes</p>
+                    <div
+                        class="w-full py-2 bg-primary/20 rounded font-tech text-primary font-bold text-xs border border-primary/40">
+                        $50 Credit + Titan Rank</div>
+                </div>
+
+                <!-- 3rd Place -->
+                <div
+                    class="order-3 md:order-3 glass-panel p-6 rounded-t-3xl rounded-b-xl border-t-4 border-orange-500 text-center relative flex flex-col items-center justify-end md:h-[200px]">
+                    <div
+                        class="absolute -top-6 w-12 h-12 rounded-full bg-orange-500 border-4 border-zinc-900 flex items-center justify-center text-zinc-900 font-black font-minecraft text-lg shadow-[0_0_15px_rgba(249,115,22,0.5)]">
+                        #3</div>
+                    <img loading="lazy" src="https://minotar.net/helm/Steve_123/64.png" alt="Player Head"
+                        class="w-12 h-12 rounded mb-4 mt-6 pixelated-border">
+                    <h3 class="text-lg font-bold text-white font-minecraft mb-1 truncate w-full">Steve_123</h3>
+                    <p class="text-zinc-400 font-tech text-sm uppercase tracking-widest mb-3">138 Votes</p>
+                    <div
+                        class="w-full py-2 bg-orange-500/10 rounded font-tech text-orange-400 font-bold text-xs border border-orange-500/20">
+                        $10 Store Credit</div>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div
+                class="glass-panel rounded-2xl border-white/5 p-6 flex flex-wrap justify-around items-center text-center gap-6">
+                <div>
+                    <h4 class="text-zinc-500 font-tech text-xs uppercase tracking-widest font-bold mb-1">Total Votes
+                        This Month</h4>
+                    <p class="text-2xl text-white font-minecraft font-black">12,485</p>
+                </div>
+                <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+                <div>
+                    <h4 class="text-zinc-500 font-tech text-xs uppercase tracking-widest font-bold mb-1">Total Unique
+                        Voters</h4>
+                    <p class="text-2xl text-white font-minecraft font-black">3,942</p>
+                </div>
+                <div class="w-px h-10 bg-white/10 hidden sm:block"></div>
+                <div>
+                    <h4 class="text-zinc-500 font-tech text-xs uppercase tracking-widest font-bold mb-1">All Time Votes
+                    </h4>
+                    <p class="text-2xl text-primary font-minecraft font-black">1.2M+</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Instructions & Claiming -->
+        <section class="mb-stack-lg">
+            <div class="glass-panel p-8 md:p-12 rounded-[2rem] border-white/10 bg-zinc-950/80 relative overflow-hidden">
+                <div
+                    class="absolute left-0 top-0 w-full h-1 bg-gradient-to-r from-transparent via-tertiary to-transparent opacity-50">
+                </div>
+
+                <h2 class="text-2xl md:text-3xl font-black text-white uppercase italic font-minecraft mb-8 text-center">
+                    How to Claim In-Game</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-2xl font-minecraft text-tertiary mx-auto mb-4">
+                            1</div>
+                        <h4 class="text-white font-bold font-tech uppercase tracking-wide text-lg mb-2">Vote Online</h4>
+                        <p class="text-sm text-zinc-400 font-tech">Click the links above and enter your exact Minecraft
+                            username to submit your vote.</p>
+                    </div>
+
+                    <div class="text-center relative">
+                        <div class="hidden md:block absolute top-8 -left-8 w-16 h-px bg-white/20"></div>
+                        <div
+                            class="w-16 h-16 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-2xl font-minecraft text-tertiary mx-auto mb-4">
+                            2</div>
+                        <h4 class="text-white font-bold font-tech uppercase tracking-wide text-lg mb-2">Join the Server
+                        </h4>
+                        <p class="text-sm text-zinc-400 font-tech">Log in to <span
+                                class="text-white font-bold">PLAY.HYPIXEL.NET</span>. Your votes will queue
+                            automatically while offline.</p>
+                        <div class="hidden md:block absolute top-8 -right-8 w-16 h-px bg-white/20"></div>
+                    </div>
+
+                    <div class="text-center">
+                        <div
+                            class="w-16 h-16 rounded-full bg-tertiary/20 border border-tertiary/40 flex items-center justify-center text-2xl font-minecraft text-tertiary mx-auto mb-4 shadow-[0_0_15px_rgba(159,216,228,0.3)]">
+                            3</div>
+                        <h4 class="text-white font-bold font-tech uppercase tracking-wide text-lg mb-2">Type /Reward
+                        </h4>
+                        <p class="text-sm text-zinc-400 font-tech">Open chat and type <span
+                                class="bg-zinc-800 text-tertiary px-2 py-0.5 rounded font-pixel text-[8px]">/reward</span>
+                            to claim your pending crate keys and coins!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="max-w-4xl mx-auto mb-stack-lg">
+            <div class="text-center mb-8">
+                <h2 class="text-xl md:text-2xl font-black text-white uppercase tracking-widest italic font-minecraft">
+                    Voting FAQ</h2>
+            </div>
+
+            <div class="space-y-4">
+                <div class="glass-panel p-6 rounded-xl border-white/5 group">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors mt-1">help</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-2 font-tech uppercase tracking-wide">I voted
+                                but didn't receive my rewards?</h4>
+                            <p class="text-sm text-zinc-400 font-tech leading-relaxed">Make sure you entered your
+                                Minecraft username EXACTLY as it appears, including capitalization. Also ensure you are
+                                typing <code class="text-primary bg-primary/10 px-1 rounded">/reward</code> in-game. If
+                                issues persist, the voting site API might be delayed by a few minutes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl border-white/5 group">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors mt-1">help</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-2 font-tech uppercase tracking-wide">How often
+                                can I vote?</h4>
+                            <p class="text-sm text-zinc-400 font-tech leading-relaxed">You can vote on all 4 sites once
+                                every 24 hours. The timer resets based on the time you cast your vote on that specific
+                                website.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-xl border-white/5 group">
+                    <div class="flex items-start gap-4">
+                        <span
+                            class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors mt-1">help</span>
+                        <div>
+                            <h4 class="text-base font-bold text-white mb-2 font-tech uppercase tracking-wide">Do offline
+                                votes count?</h4>
+                            <p class="text-sm text-zinc-400 font-tech leading-relaxed">Yes! You can vote while at school
+                                or work. Your rewards will be saved in our database safely until you log in and claim
+                                them.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section matching the index -->
+        <section
+            class="glass-panel rounded-3xl md:rounded-[2rem] p-8 md:p-16 mb-stack-lg border-primary/30 relative overflow-hidden text-center gold-glow">
+            <div
+                class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/10 blur-[150px] rounded-full pointer-events-none">
+            </div>
+
+            <div class="relative z-10 max-w-2xl mx-auto">
+                <span
+                    class="material-symbols-outlined text-5xl text-primary mb-4 animate-pulse">social_leaderboard</span>
+                <h2
+                    class="text-4xl md:text-6xl font-black text-white mb-6 uppercase tracking-tighter italic font-minecraft">
+                    Become a Legend
+                </h2>
+                <p class="text-zinc-300 text-lg md:text-xl mb-10 font-tech">
+                    Voting keeps the community alive and brings new players to the network. Join our Discord to track
+                    leaderboards live!
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
+                        class="button-shine w-full sm:w-auto bg-primary text-on-primary px-10 py-5 rounded-xl font-tech font-black text-lg flex items-center justify-center gap-3 active:scale-95 transition-transform shadow-[0_0_20px_rgba(242,202,80,0.4)]">
+                        <span class="material-symbols-outlined">bolt</span>
+                        JOIN NETWORK
+                    </button>
+                    <button
+                        class="w-full sm:w-auto px-10 py-5 glass-panel hover:bg-white/10 rounded-xl font-bold text-lg text-white border-white/20 transition-all font-tech flex items-center justify-center gap-3 active:scale-95">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z" />
+                        </svg>
+                        DISCORD
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer matching index.html -->
+    <footer class="w-full border-t border-white/10 mt-10 bg-zinc-950/80 backdrop-blur-3xl pb-24 md:pb-0 relative z-40">
+        <div class="w-full px-6 md:px-16 py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <div
+                    class="text-xl font-black text-yellow-500 font-minecraft mb-4 flex justify-center md:justify-start">
+                    <img loading="lazy" src="logo.png"
+                        class="h-8 md:h-10 object-contain grayscale relative z-10 transition-transform" alt="Logo" />
+                </div>
+                <p class="font-tech text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">© 2026 Hypixel
+                    Network. Not an official Minecraft product.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Privacy Policy</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Terms of Service</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Support</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Staff Applications</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="#">Contact</a>
+            </div>
+            <div class="flex gap-4">
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="language">language</span>
+                </div>
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="policy">policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- MOBILE BOTTOM NAVIGATION                   -->
+    <!-- ========================================== -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-panel border-t border-white/10 px-4 py-3 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.5)]">
+        <ul class="flex justify-between items-center max-w-sm mx-auto">
+
+            <li>
+                <a href="store.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">shopping_cart</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Store</span>
+                </a>
+            </li>
+            <li>
+                <a href="features.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">explore</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Play</span>
+                </a>
+            </li>
+            <li>
+                <a href="vote.html"
+                    class="flex flex-col items-center text-primary hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">how_to_vote</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Vote</span>
+                </a>
+            </li>
+            <li>
+                <a href="forums.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">forum</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Forums</span>
+                </a>
+            </li>
+            <li>
+                <a href="wiki.html"
+                    class="flex flex-col items-center text-zinc-500 hover:text-white group transition-colors">
+                    <span
+                        class="material-symbols-outlined text-2xl mb-1 group-active:scale-90 transition-transform">menu_book</span>
+                    <span class="font-tech text-[10px] font-bold tracking-widest uppercase">Wiki</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+    <!-- Floating Background Particles -->
+    <div class="fixed inset-0 pointer-events-none z-[1]">
+        <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary/20 blur-sm rounded-full animate-pulse"></div>
+        <div class="absolute top-3/4 left-2/3 w-3 h-3 bg-tertiary/20 blur-md rounded-full animate-pulse"
+            style="animation-delay: 1s"></div>
+        <div class="absolute top-1/2 right-1/4 w-2 h-2 bg-secondary/10 blur-sm rounded-full animate-pulse"
+            style="animation-delay: 2s"></div>
+    </div>
+
+    <!-- Universal Toast Notification -->
+    <div id="copy-toast"
+        class="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-[100] transform translate-y-20 hidden pointer-events-none transition-all duration-500 ease-out">
+        <div
+            class="glass-panel px-4 md:px-6 py-3 md:py-4 rounded-xl border-primary/30 shadow-[0_0_30px_rgba(242,202,80,0.2)] flex items-center gap-3 md:gap-4">
+            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-primary/20 flex items-center justify-center text-primary"
+                id="toast-icon-bg">
+                <span class="material-symbols-outlined text-xs md:text-sm" id="toast-icon">info</span>
+            </div>
+            <div class="flex flex-col">
+                <p class="pixel-text text-[8px] md:text-[10px] text-primary mb-1 uppercase tracking-tighter"
+                    id="toast-title">Notification</p>
+                <p id="toast-message"
+                    class="text-white font-tech font-bold text-xs md:text-sm uppercase tracking-widest">Message here</p>
+            </div>
+            <div class="ml-2 md:ml-4 h-1 w-6 md:w-8 bg-primary/20 rounded-full overflow-hidden">
+                <div class="h-full bg-primary" id="timeout"></div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes progress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
+    </style>
+
+    <script>
+        // Copy IP logic
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification("Success", "IP Copied to clipboard", "content_copy");
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        // Copy Username logic from input field
+        function copyUsername() {
+            const input = document.getElementById('vote-username');
+            if (input.value.trim() === '') {
+                showNotification("Error", "Please enter a username", "error");
+                return;
+            }
+            navigator.clipboard.writeText(input.value).then(() => {
+                showNotification("Copied", "Username ready to paste!", "check_circle");
+            });
+        }
+
+        // Dynamic Toast Notification
+        function showNotification(title, message, iconName) {
+            const toast = document.getElementById('copy-toast');
+            const titleEl = document.getElementById('toast-title');
+            const messageEl = document.getElementById('toast-message');
+            const iconEl = document.getElementById('toast-icon');
+            const tmout = toast.querySelector('#timeout');
+
+            titleEl.innerText = title;
+            messageEl.innerText = message;
+            if (iconName) iconEl.innerText = iconName;
+
+            toast.classList.remove('translate-y-20', 'hidden', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            // Re-trigger animation
+            tmout.style.animation = 'none';
+            tmout.offsetHeight; /* trigger reflow */
+            tmout.style.animation = 'progress 3s linear forwards';
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'hidden', 'pointer-events-none');
+                toast.classList.remove('translate-y-0', 'opacity-100');
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>
