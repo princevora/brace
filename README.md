@@ -1,5 +1,5 @@
 ![Home](screenshots/image.png)
-![Store](screenshots/image-1.png1`)
+![Store](screenshots/image-1.png1)
 ![Features](screenshots/image-2.png)
 ![Vote](screenshots/image-3.png)
 ![Forum](screenshots/image-4.png)
