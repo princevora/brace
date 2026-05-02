@@ -251,51 +251,77 @@
     <!-- ========================================== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
-            <nav
-                class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+            <nav class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img loading="lazy" src="logo.png" class="h-8 md:h-10" alt="Logo">
 
-                <!-- Logo Section -->
-                <div class="flex items-center gap-3 group cursor-pointer">
-                    <a href="index.html" class="relative block">
-                        <div
-                            class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
-                        </div>
-                        <img loading="lazy" src="logo.png"
-                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
-                    </a>
+                </a>
+                <div class="hidden xl:flex items-center gap-6 header-nav">
+                    <a href="index.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
                 </div>
-
-                <!-- Navigation Links -->
-                <!-- NOTE: Apply 'active text-primary' to the current page -->
-                <div class="hidden md:flex items-center gap-10">
-                    <a href="store.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
-                    <a href="features.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
-                    <a href="vote.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
-                    <a href="forums.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
-                    <a href="wiki.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase active">Wiki</a>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="login.html" class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors">Login</a>
+                    <a href="register.html" class="px-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-tech font-bold tracking-widest uppercase hover:bg-white/10 transition-colors">Register</a>
                 </div>
-
-                <!-- Action Buttons -->
-                <div class="flex items-center gap-2">
-                    <button
-                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">Login</button>
-                    <div class="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block"></div>
-                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
-                        class="button-shine group bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(242,202,80,0.3)] hover:shadow-primary/40 transition-all active:scale-95">
-                        <span class="pixel-text text-[10px] hidden sm:block">PLAY NOW</span>
-                        <span class="pixel-text text-[10px] block sm:hidden">PLAY</span>
-                        <span
-                            class="material-symbols-outlined text-lg leading-none group-hover:translate-x-1 transition-transform">bolt</span>
-                    </button>
-                </div>
+                <button id="mobile-menu-toggle" class="xl:hidden p-2 rounded-2xl border border-white/10 text-white/80 hover:text-white" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
             </nav>
+            <div id="mobile-menu" class="hidden absolute inset-x-4 top-full mt-3 rounded-3xl glass-panel p-4 border-white/10 shadow-2xl z-50 xl:hidden">
+                <div class="grid gap-2">
+                    <a href="index.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                    <div class="pt-3 border-t border-white/10 mt-3 flex flex-col gap-2">
+                        <a href="login.html" class="px-4 py-3 bg-white/5 text-white rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-white/10">Login</a>
+                        <a href="register.html" class="px-4 py-3 bg-primary text-on-primary rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-primary-fixed">Register</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const menu = document.getElementById('mobile-menu');
+                    const toggle = document.getElementById('mobile-menu-toggle');
+                    if (toggle && menu) {
+                        toggle.addEventListener('click', function () {
+                            menu.classList.toggle('hidden');
+                        });
+                    }
+
+                    const path = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+                    const current = {
+                        '': 'index.html',
+                        'index.html': 'index.html',
+                        'store.html': 'store.html',
+                        'features.html': 'features.html',
+                        'vote.html': 'vote.html',
+                        'forums.html': 'forums.html',
+                        'forum-thread.html': 'forums.html',
+                        'wiki.html': 'wiki.html',
+                        'login.html': 'login.html',
+                        'register.html': 'register.html'
+                    }[path] || path;
+
+                    document.querySelectorAll('.header-nav a.nav-link, #mobile-menu a.nav-link').forEach(function (link) {
+                        if (link.getAttribute('href') === current) {
+                            link.classList.add('active', 'text-primary');
+                            link.classList.remove('text-white/70');
+                        } else {
+                            link.classList.remove('active', 'text-primary');
+                            link.classList.add('text-white/70');
+                        }
+                    });
+                });
+            </script>
         </div>
     </header>
 
@@ -657,29 +683,35 @@
                         <span class="material-symbols-outlined text-zinc-400">help</span> Frequently Asked Questions
                     </h2>
                     <div class="space-y-3">
-                        <div
-                            class="glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors group cursor-pointer">
-                            <h4
-                                class="text-base font-bold text-white font-tech uppercase tracking-wide flex items-center justify-between">
-                                Can Bedrock players join? <span
-                                    class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors">expand_more</span>
-                            </h4>
+                        <div class="faq-card glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors">
+                            <button type="button"
+                                class="faq-header w-full text-left flex items-center justify-between text-base font-bold text-white font-tech uppercase tracking-wide">
+                                <span>Can Bedrock players join?</span>
+                                <span class="material-symbols-outlined text-zinc-500 transition-colors">expand_more</span>
+                            </button>
+                            <div class="faq-content hidden mt-4 text-sm text-zinc-400 font-tech leading-relaxed">
+                                Yes — Bedrock players can join using our crossplay IP. The server supports Java and Bedrock players on the same network with full compatibility.
+                            </div>
                         </div>
-                        <div
-                            class="glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors group cursor-pointer">
-                            <h4
-                                class="text-base font-bold text-white font-tech uppercase tracking-wide flex items-center justify-between">
-                                Are auto-farms allowed? <span
-                                    class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors">expand_more</span>
-                            </h4>
+                        <div class="faq-card glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors">
+                            <button type="button"
+                                class="faq-header w-full text-left flex items-center justify-between text-base font-bold text-white font-tech uppercase tracking-wide">
+                                <span>Are auto-farms allowed?</span>
+                                <span class="material-symbols-outlined text-zinc-500 transition-colors">expand_more</span>
+                            </button>
+                            <div class="faq-content hidden mt-4 text-sm text-zinc-400 font-tech leading-relaxed">
+                                Basic passive farms are allowed, but any automation that breaks the intended challenge of the server or exploits glitches is prohibited. Always consult the rules before building large farms.
+                            </div>
                         </div>
-                        <div
-                            class="glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors group cursor-pointer">
-                            <h4
-                                class="text-base font-bold text-white font-tech uppercase tracking-wide flex items-center justify-between">
-                                How do I apply for staff? <span
-                                    class="material-symbols-outlined text-zinc-500 group-hover:text-primary transition-colors">expand_more</span>
-                            </h4>
+                        <div class="faq-card glass-panel p-5 rounded-2xl border-white/5 hover:border-white/20 transition-colors">
+                            <button type="button"
+                                class="faq-header w-full text-left flex items-center justify-between text-base font-bold text-white font-tech uppercase tracking-wide">
+                                <span>How do I apply for staff?</span>
+                                <span class="material-symbols-outlined text-zinc-500 transition-colors">expand_more</span>
+                            </button>
+                            <div class="faq-content hidden mt-4 text-sm text-zinc-400 font-tech leading-relaxed">
+                                Staff applications are available in the Support section. Complete the application honestly and include screenshots of your activity, experience, and previous moderation history.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -728,15 +760,15 @@
             </div>
             <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Privacy Policy</a>
+                    href="privacy.html">Privacy Policy</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Terms of Service</a>
+                    href="terms.html">Terms of Service</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Support</a>
+                    href="support.html">Support</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Staff Applications</a>
+                    href="staff.html">Staff Applications</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Contact</a>
+                    href="contact.html">Contact</a>
             </div>
             <div class="flex gap-4">
                 <div
@@ -802,6 +834,17 @@
         </ul>
     </nav>
 
+    <script>
+        document.querySelectorAll('.faq-card').forEach(card => {
+            const button = card.querySelector('.faq-header');
+            const content = card.querySelector('.faq-content');
+            button.addEventListener('click', () => {
+                const isOpen = !content.classList.contains('hidden');
+                content.classList.toggle('hidden');
+                button.querySelector('.material-symbols-outlined').textContent = isOpen ? 'expand_more' : 'expand_less';
+            });
+        });
+    </script>
 </body>
 
 </html>

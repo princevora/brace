@@ -222,25 +222,16 @@
     <!-- ========================================== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
             <nav
                 class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img loading="lazy" src="logo.png" class="h-8 md:h-10" alt="Logo">
 
-                <!-- Logo Section -->
-                <div class="flex items-center gap-3 group cursor-pointer">
-                    <a href="index.html" class="relative block">
-                        <div
-                            class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
-                        </div>
-                        <img loading="lazy" src="logo.png"
-                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <!-- NOTE: Apply 'active text-primary' to the current page -->
-                <div class="hidden md:flex items-center gap-10">
+                </a>
+                <div class="hidden xl:flex items-center gap-6 header-nav">
+                    <a href="index.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
                     <a href="store.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
                     <a href="features.html"
@@ -248,25 +239,80 @@
                     <a href="vote.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
                     <a href="forums.html"
-                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase active">Forums</a>
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
                     <a href="wiki.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
                 </div>
-
-                <!-- Action Buttons -->
-                <div class="flex items-center gap-2">
-                    <button
-                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors hidden lg:block">Login</button>
-                    <div class="h-6 w-[1px] bg-white/10 mx-2 hidden lg:block"></div>
-                    <button onclick="copyToClipboard('PLAY.HYPIXEL.NET')"
-                        class="button-shine group bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-xl flex items-center gap-2 shadow-[0_0_15px_rgba(242,202,80,0.3)] hover:shadow-primary/40 transition-all active:scale-95">
-                        <span class="pixel-text text-[10px] hidden sm:block">PLAY NOW</span>
-                        <span class="pixel-text text-[10px] block sm:hidden">PLAY</span>
-                        <span
-                            class="material-symbols-outlined text-lg leading-none group-hover:translate-x-1 transition-transform">bolt</span>
-                    </button>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="login.html"
+                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors">Login</a>
+                    <a href="register.html"
+                        class="px-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-tech font-bold tracking-widest uppercase hover:bg-white/10 transition-colors">Register</a>
                 </div>
+                <button id="mobile-menu-toggle"
+                    class="xl:hidden p-2 rounded-2xl border border-white/10 text-white/80 hover:text-white"
+                    aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
             </nav>
+            <div id="mobile-menu"
+                class="hidden absolute inset-x-4 top-full mt-3 rounded-3xl glass-panel p-4 border-white/10 shadow-2xl z-50 xl:hidden">
+                <div class="grid gap-2">
+                    <a href="index.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                    <div class="pt-3 border-t border-white/10 mt-3 flex flex-col gap-2">
+                        <a href="login.html"
+                            class="px-4 py-3 bg-white/5 text-white rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-white/10">Login</a>
+                        <a href="register.html"
+                            class="px-4 py-3 bg-primary text-on-primary rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-primary-fixed">Register</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const menu = document.getElementById('mobile-menu');
+                    const toggle = document.getElementById('mobile-menu-toggle');
+                    if (toggle && menu) {
+                        toggle.addEventListener('click', function () {
+                            menu.classList.toggle('hidden');
+                        });
+                    }
+
+                    const path = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+                    const current = {
+                        '': 'index.html',
+                        'index.html': 'index.html',
+                        'store.html': 'store.html',
+                        'features.html': 'features.html',
+                        'vote.html': 'vote.html',
+                        'forums.html': 'forums.html',
+                        'forum-thread.html': 'forums.html',
+                        'wiki.html': 'wiki.html',
+                        'login.html': 'login.html',
+                        'register.html': 'register.html'
+                    }[path] || path;
+
+                    document.querySelectorAll('.header-nav a.nav-link, #mobile-menu a.nav-link').forEach(function (link) {
+                        if (link.getAttribute('href') === current) {
+                            link.classList.add('active', 'text-primary');
+                            link.classList.remove('text-white/70');
+                        } else {
+                            link.classList.remove('active', 'text-primary');
+                            link.classList.add('text-white/70');
+                        }
+                    });
+                });
+            </script>
         </div>
     </header>
 
@@ -351,11 +397,13 @@
                                 <span class="material-symbols-outlined text-2xl">campaign</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-primary transition-colors">
-                                    News & Announcements</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Official server updates,
-                                    changelogs, and important news from the administration team.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-primary transition-colors">
+                                        News & Announcements</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Official server updates,
+                                        changelogs, and important news from the administration team.</p>
+                                </a>
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">1.2k</div>
@@ -371,11 +419,16 @@
                                 <span class="material-symbols-outlined text-2xl">event_available</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-tertiary transition-colors">
-                                    Events & Giveaways</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Participate in community events,
-                                    build battles, and enter official server giveaways.</p>
+                                <a href="forum-thread.html">
+
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-tertiary transition-colors">
+                                        Events & Giveaways</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Participate in community
+                                        events,
+                                        build battles, and enter official server giveaways.</p>
+                                </a>
+
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">452</div>
@@ -402,11 +455,15 @@
                                 <span class="material-symbols-outlined text-2xl">forum</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-white transition-colors">
-                                    General Discussion</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Talk about anything related to the
-                                    network, share your creations, and meet new players.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-white transition-colors">
+                                        General Discussion</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Talk about anything related to
+                                        the
+                                        network, share your creations, and meet new players.</p>
+                                </a>
+
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">18.5k</div>
@@ -422,11 +479,14 @@
                                 <span class="material-symbols-outlined text-2xl">lightbulb</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-purple-400 transition-colors">
-                                    Suggestions</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Have a brilliant idea for the
-                                    server? Post it here and let the community vote on it.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-purple-400 transition-colors">
+                                        Suggestions</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Have a brilliant idea for the
+                                        server? Post it here and let the community vote on it.</p>
+                                </a>
+
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">3.2k</div>
@@ -442,11 +502,13 @@
                                 <span class="material-symbols-outlined text-2xl">movie</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-blue-400 transition-colors">
-                                    Media Showcase</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Share your YouTube videos,
-                                    streams, screenshots, and artwork created on the server.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-blue-400 transition-colors">
+                                        Media Showcase</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Share your YouTube videos,
+                                        streams, screenshots, and artwork created on the server.</p>
+                                </a>
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">8.9k</div>
@@ -473,11 +535,13 @@
                                 <span class="material-symbols-outlined text-2xl">live_help</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-orange-400 transition-colors">
-                                    Community Support</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Need help with a command or
-                                    plugin? Ask the community and staff team for assistance here.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-orange-400 transition-colors">
+                                        Community Support</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Need help with a command or
+                                        plugin? Ask the community and staff team for assistance here.</p>
+                                </a>
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">5.1k</div>
@@ -493,11 +557,14 @@
                                 <span class="material-symbols-outlined text-2xl">bug_report</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
-                                    Bug Reports</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Found a glitch or exploit? Report
-                                    it here. All threads are private to staff and the creator.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
+                                        Bug Reports</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Found a glitch or exploit?
+                                        Report
+                                        it here. All threads are private to staff and the creator.</p>
+                                </a>
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">Private</div>
@@ -513,11 +580,14 @@
                                 <span class="material-symbols-outlined text-2xl">gavel</span>
                             </div>
                             <div class="flex-grow">
-                                <h4
-                                    class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
-                                    Punishment Appeals</h4>
-                                <p class="text-xs md:text-sm text-zinc-400 font-tech">Believe you were falsely banned or
-                                    muted? Submit an appeal for the moderation team to review.</p>
+                                <a href="forum-thread.html">
+                                    <h4
+                                        class="font-bold text-white text-base md:text-lg font-tech uppercase tracking-wide group-hover:text-red-500 transition-colors">
+                                        Punishment Appeals</h4>
+                                    <p class="text-xs md:text-sm text-zinc-400 font-tech">Believe you were falsely
+                                        banned or
+                                        muted? Submit an appeal for the moderation team to review.</p>
+                                </a>
                             </div>
                             <div class="hidden sm:block text-right shrink-0 min-w-[80px]">
                                 <div class="text-sm font-bold text-white font-tech">Private</div>
@@ -544,12 +614,12 @@
                     <p class="text-xs text-zinc-400 font-tech mb-6 leading-relaxed">Log in or create an account to post
                         threads, reply to discussions, and link your Minecraft character.</p>
                     <div class="flex flex-col gap-3 relative z-10">
-                        <button
-                            class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold text-xs tracking-widest uppercase font-tech hover:scale-[1.02] active:scale-95 transition-transform shadow-[0_0_15px_rgba(242,202,80,0.3)]">Sign
-                            In</button>
-                        <button
-                            class="w-full py-3 glass-panel hover:bg-white/10 text-white border-white/20 rounded-xl font-bold text-xs tracking-widest uppercase font-tech transition-colors">Register
-                            Account</button>
+                        <a href="login.html"
+                            class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold text-xs tracking-widest uppercase font-tech hover:scale-[1.02] active:scale-95 transition-transform shadow-[0_0_15px_rgba(242,202,80,0.3)] inline-flex justify-center">Sign
+                            In</a>
+                        <a href="register.html"
+                            class="w-full py-3 glass-panel hover:bg-white/10 text-white border-white/20 rounded-xl font-bold text-xs tracking-widest uppercase font-tech transition-colors inline-flex justify-center">Register
+                            Account</a>
                     </div>
                 </div>
 
@@ -562,7 +632,8 @@
                     </div>
                     <div class="flex flex-col p-2">
                         <!-- Post Item -->
-                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                        <a href="forum-thread.html"
+                            class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
                             <img loading="lazy" src="https://minotar.net/helm/Techno_God/32.png" alt="Avatar"
                                 class="w-8 h-8 rounded shrink-0 pixelated-border mt-0.5">
                             <div class="overflow-hidden">
@@ -578,7 +649,8 @@
                             </div>
                         </a>
                         <!-- Post Item -->
-                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                        <a href="forum-thread.html"
+                            class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
                             <img loading="lazy" src="https://minotar.net/helm/Notch_Fan/32.png" alt="Avatar"
                                 class="w-8 h-8 rounded shrink-0 pixelated-border mt-0.5">
                             <div class="overflow-hidden">
@@ -594,7 +666,8 @@
                             </div>
                         </a>
                         <!-- Post Item -->
-                        <a href="#" class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
+                        <a href="forum-thread.html"
+                            class="flex gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors group">
                             <div
                                 class="w-8 h-8 rounded shrink-0 border border-red-500/50 flex items-center justify-center bg-red-500/10 mt-0.5">
                                 <span class="material-symbols-outlined text-red-500 text-sm">gavel</span>
@@ -708,15 +781,15 @@
             </div>
             <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Privacy Policy</a>
+                    href="privacy.html">Privacy Policy</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Terms of Service</a>
+                    href="terms.html">Terms of Service</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Support</a>
+                    href="support.html">Support</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Staff Applications</a>
+                    href="staff.html">Staff Applications</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Contact</a>
+                    href="contact.html">Contact</a>
             </div>
             <div class="flex gap-4">
                 <div
