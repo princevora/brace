@@ -214,6 +214,16 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        @keyframes progress {
+            from {
+                width: 100%;
+            }
+
+            to {
+                width: 0%;
+            }
+        }
     </style>
 </head>
 
@@ -233,26 +243,18 @@
     <!-- ========================================== -->
     <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
         <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
-
         <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
             <nav
                 class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img loading="lazy" src="logo.png" class="h-8 md:h-10" alt="Logo">
 
-                <!-- Logo Section -->
-                <div class="flex items-center gap-3 group cursor-pointer">
-                    <a href="index.html" class="relative block">
-                        <div
-                            class="absolute inset-0 bg-primary/20 blur-lg rounded-full group-hover:bg-primary/40 transition-all">
-                        </div>
-                        <img loading="lazy" src="logo.png"
-                            class="h-8 md:h-10 object-contain relative z-10 transition-transform" alt="Logo">
-                    </a>
-                </div>
-
-                <!-- Navigation Links (Store is Active) -->
-                <div class="hidden md:flex items-center gap-10">
+                </a>
+                <div class="hidden xl:flex items-center gap-6 header-nav">
+                    <a href="index.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
                     <a href="store.html"
-                        class="nav-link active text-primary font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
                     <a href="features.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
                     <a href="vote.html"
@@ -262,22 +264,76 @@
                     <a href="wiki.html"
                         class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
                 </div>
-
-                <!-- Store Action Buttons (Cart & Checkout) -->
-                <div class="flex items-center gap-3">
-                    <div class="hidden lg:flex flex-col items-end mr-2">
-                        <span
-                            class="text-[10px] text-zinc-500 font-tech font-bold uppercase tracking-widest">Basket</span>
-                        <span class="text-sm text-white font-minecraft">0 Items <span
-                                class="text-primary text-xs ml-1 font-tech">$0.00</span></span>
-                    </div>
-                    <button
-                        class="button-shine group bg-primary/10 border border-primary/30 text-primary px-4 py-2.5 rounded-xl flex items-center gap-2 hover:bg-primary hover:text-on-primary transition-all active:scale-95 shadow-[0_0_15px_rgba(242,202,80,0.15)]">
-                        <span class="material-symbols-outlined text-lg leading-none">shopping_cart_checkout</span>
-                        <span class="pixel-text text-[10px] hidden sm:block">CHECKOUT</span>
-                    </button>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="login.html"
+                        class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors">Login</a>
+                    <a href="register.html"
+                        class="px-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-tech font-bold tracking-widest uppercase hover:bg-white/10 transition-colors">Register</a>
                 </div>
+                <button id="mobile-menu-toggle"
+                    class="xl:hidden p-2 rounded-2xl border border-white/10 text-white/80 hover:text-white"
+                    aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
             </nav>
+            <div id="mobile-menu"
+                class="hidden absolute inset-x-4 top-full mt-3 rounded-3xl glass-panel p-4 border-white/10 shadow-2xl z-50 xl:hidden">
+                <div class="grid gap-2">
+                    <a href="index.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html"
+                        class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                    <div class="pt-3 border-t border-white/10 mt-3 flex flex-col gap-2">
+                        <a href="login.html"
+                            class="px-4 py-3 bg-white/5 text-white rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-white/10">Login</a>
+                        <a href="register.html"
+                            class="px-4 py-3 bg-primary text-on-primary rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-primary-fixed">Register</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const menu = document.getElementById('mobile-menu');
+                    const toggle = document.getElementById('mobile-menu-toggle');
+                    if (toggle && menu) {
+                        toggle.addEventListener('click', function () {
+                            menu.classList.toggle('hidden');
+                        });
+                    }
+
+                    const path = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+                    const current = {
+                        '': 'index.html',
+                        'index.html': 'index.html',
+                        'store.html': 'store.html',
+                        'features.html': 'features.html',
+                        'vote.html': 'vote.html',
+                        'forums.html': 'forums.html',
+                        'forum-thread.html': 'forums.html',
+                        'wiki.html': 'wiki.html',
+                        'login.html': 'login.html',
+                        'register.html': 'register.html'
+                    }[path] || path;
+
+                    document.querySelectorAll('.header-nav a.nav-link, #mobile-menu a.nav-link').forEach(function (link) {
+                        if (link.getAttribute('href') === current) {
+                            link.classList.add('active', 'text-primary');
+                            link.classList.remove('text-white/70');
+                        } else {
+                            link.classList.remove('active', 'text-primary');
+                            link.classList.add('text-white/70');
+                        }
+                    });
+                });
+            </script>
         </div>
     </header>
 
@@ -316,411 +372,638 @@
         </section>
 
         <!-- Category Navigation -->
-        <div class="sticky top-20 md:top-24 z-40  mb-10">
+        <div class="top-20 md:top-24 z-40  mb-10">
             <div
                 class="flex overflow-x-auto custom-scrollbar snap-x snap-mandatory gap-3 py-4 px-4 max-w-7xl mx-auto flex-nowrap">
-                <button
-                    class="flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all bg-primary text-black shadow-[0_0_15px_rgba(242,202,80,0.3)]">
+                <button data-category="global-ranks"
+                    class="category-tab flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all bg-primary text-black shadow-[0_0_15px_rgba(242,202,80,0.3)]">
                     Global Ranks
                 </button>
-                <button
-                    class="flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
+                <button data-category="mystery-crates"
+                    class="category-tab flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
                     Mystery Crates
                 </button>
-                <button
-                    class="flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
+                <button data-category="network-coins"
+                    class="category-tab flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
                     Network Coins
                 </button>
-                <button
-                    class="flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
+                <button data-category="special-bundles"
+                    class="category-tab flex-shrink-0 snap-start px-6 py-2.5 rounded-lg font-tech font-bold text-sm tracking-widest uppercase transition-all glass-panel text-zinc-400 hover:text-white border-white/5">
                     Special Bundles
                 </button>
                 <div class="flex-shrink-0 w-4"></div>
             </div>
         </div>
 
-        <!-- Flash Sale Banner -->
-        <section class="mb-16">
-            <div class="glass-panel rounded-3xl p-1 border-red-500/50 relative overflow-hidden group">
-                <div class="absolute inset-0 bg-gradient-to-r from-red-600/20 via-orange-500/20 to-transparent"></div>
-                <div
-                    class="absolute top-0 right-0 w-64 h-64 bg-red-500/20 blur-[80px] rounded-full group-hover:bg-red-500/30 transition-colors">
-                </div>
-
-                <div
-                    class="bg-zinc-950/80 backdrop-blur-sm rounded-[22px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 border border-white/5">
-                    <div class="flex items-center gap-6 text-center md:text-left">
-                        <div
-                            class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.4)] shrink-0 hidden sm:flex">
-                            <span class="material-symbols-outlined text-4xl text-white">local_fire_department</span>
+        <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_360px] gap-8 relative overflow-visible">
+            <div class="space-y-16">
+                <!-- Flash Sale Banner -->
+                <section class="mb-16">
+                    <div class="glass-panel rounded-3xl p-1 border-red-500/50 relative overflow-hidden group">
+                        <div class="absolute inset-0 bg-gradient-to-r from-red-600/20 via-orange-500/20 to-transparent">
                         </div>
+                        <div
+                            class="absolute top-0 right-0 w-64 h-64 bg-red-500/20 blur-[80px] rounded-full group-hover:bg-red-500/30 transition-colors">
+                        </div>
+
+                        <div
+                            class="bg-zinc-950/80 backdrop-blur-sm rounded-[22px] p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 border border-white/5">
+                            <div class="flex items-center gap-6 text-center md:text-left">
+                                <div
+                                    class="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-orange-600 flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.4)] shrink-0 hidden sm:flex">
+                                    <span
+                                        class="material-symbols-outlined text-4xl text-white">local_fire_department</span>
+                                </div>
+                                <div>
+                                    <span
+                                        class="px-3 py-1 bg-red-500/20 text-red-400 text-[10px] font-black uppercase rounded tracking-widest mb-2 inline-block font-tech border border-red-500/30">Ends
+                                        in 24 Hours</span>
+                                    <h2
+                                        class="text-2xl sm:text-3xl font-black text-white font-minecraft uppercase italic tracking-tighter">
+                                        Summer Flash Sale</h2>
+                                    <p class="text-zinc-400 font-tech text-sm mt-1">Get an automatic <strong
+                                            class="text-white">30% OFF</strong> all Ranks and Rank Upgrades at checkout.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-center shrink-0">
+                                <p class="text-3xl font-black text-red-500 font-minecraft italic">-30%</p>
+                                <p class="text-[10px] text-zinc-500 font-tech uppercase tracking-widest">Auto-applied
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <!-- Featured Ranks Section -->
+                <section id="global-ranks" class="category-content mb-stack-lg">
+                    <div class="text-center mb-10">
+                        <h2
+                            class="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-widest italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                            Lifetime Ranks
+                        </h2>
+                        <p class="text-zinc-400 text-sm font-tech">One-time purchase. Permanent perks across the entire
+                            network.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- VIP Rank -->
+                        <div
+                            class="store-card glass-panel rounded-3xl p-6 border-zinc-500/30 flex flex-col h-full relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 bg-zinc-600 text-white px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
+                                LIFETIME</div>
+                            <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                                <div
+                                    class="w-16 h-16 mx-auto rounded-xl bg-zinc-500/10 flex items-center justify-center mb-4 text-zinc-400">
+                                    <span class="material-symbols-outlined text-3xl">shield</span>
+                                </div>
+                                <h3
+                                    class="text-2xl font-black text-white font-minecraft italic uppercase tracking-tighter mb-1">
+                                    VIP</h3>
+                                <div class="flex justify-center items-end gap-1">
+                                    <p class="text-zinc-500 line-through font-tech text-sm">$14.99</p>
+                                    <p class="text-xl font-bold text-primary font-minecraft">$10.49</p>
+                                </div>
+                            </div>
+                            <ul class="flex-grow space-y-3 mb-8">
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
+                                    White [VIP] Prefix</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
+                                    2x Coin Multiplier</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
+                                    Skip Server Queue</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
+                                    5
+                                    Wardrobe Slots</li>
+                            </ul>
+                            <button onclick="addToCart('VIP Rank')"
+                                class="w-full py-3 glass-panel hover:bg-zinc-500/20 rounded-xl font-bold text-sm text-white border-zinc-500/30 transition-all uppercase font-tech flex justify-center items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                            </button>
+                        </div>
+
+                        <!-- MVP Rank -->
+                        <div
+                            class="store-card glass-panel rounded-3xl p-6 border-tertiary/30 flex flex-col h-full relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 bg-tertiary text-on-tertiary px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
+                                LIFETIME</div>
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-tertiary/10 blur-[50px] rounded-full">
+                            </div>
+                            <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                                <div
+                                    class="w-16 h-16 mx-auto rounded-xl bg-tertiary/10 flex items-center justify-center mb-4 text-tertiary">
+                                    <span class="material-symbols-outlined text-3xl">verified</span>
+                                </div>
+                                <h3
+                                    class="text-2xl font-black text-tertiary font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_10px_rgba(159,216,228,0.4)]">
+                                    MVP</h3>
+                                <div class="flex justify-center items-end gap-1">
+                                    <p class="text-zinc-500 line-through font-tech text-sm">$34.99</p>
+                                    <p class="text-xl font-bold text-primary font-minecraft">$24.49</p>
+                                </div>
+                            </div>
+                            <ul class="flex-grow space-y-3 mb-8 relative z-10">
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
+                                    Blue [MVP] Prefix</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
+                                    3x Coin Multiplier</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
+                                    Fly in Lobbies</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
+                                    Access to /nick</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
+                                    All VIP Perks</li>
+                            </ul>
+                            <button onclick="addToCart('MVP Rank')"
+                                class="w-full py-3 glass-panel hover:bg-tertiary/20 rounded-xl font-bold text-sm text-white border-tertiary/30 transition-all uppercase font-tech flex justify-center items-center gap-2 relative z-10">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                            </button>
+                        </div>
+
+                        <!-- Titan Rank -->
+                        <div
+                            class="store-card glass-panel rounded-3xl p-6 border-red-500/40 flex flex-col h-full relative overflow-hidden">
+                            <div
+                                class="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
+                                LIFETIME</div>
+                            <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-500/10 blur-[50px] rounded-full">
+                            </div>
+                            <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                                <div
+                                    class="w-16 h-16 mx-auto rounded-xl bg-red-500/10 flex items-center justify-center mb-4 text-red-500">
+                                    <span class="material-symbols-outlined text-3xl">local_fire_department</span>
+                                </div>
+                                <h3
+                                    class="text-2xl font-black text-red-500 font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_10px_rgba(239,68,68,0.4)]">
+                                    TITAN</h3>
+                                <div class="flex justify-center items-end gap-1">
+                                    <p class="text-zinc-500 line-through font-tech text-sm">$74.99</p>
+                                    <p class="text-xl font-bold text-primary font-minecraft">$52.49</p>
+                                </div>
+                            </div>
+                            <ul class="flex-grow space-y-3 mb-8 relative z-10">
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
+                                    Red [TITAN] Prefix</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
+                                    5x
+                                    Coin Multiplier</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
+                                    Auto-Join Full Games</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
+                                    Create Custom Guilds</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
+                                        class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
+                                    Animated Gadgets</li>
+                            </ul>
+                            <button onclick="addToCart('Titan Rank')"
+                                class="w-full py-3 glass-panel hover:bg-red-500/20 rounded-xl font-bold text-sm text-white border-red-500/40 transition-all uppercase font-tech flex justify-center items-center gap-2 relative z-10">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                            </button>
+                        </div>
+
+                        <!-- Legend Rank -->
+                        <div
+                            class="store-card glass-panel rounded-3xl p-6 border-primary pixelated-border gold-glow flex flex-col h-full relative overflow-hidden transform md:-translate-y-2">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none">
+                            </div>
+                            <div
+                                class="absolute top-0 right-0 bg-primary text-black px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-[0_0_10px_rgba(242,202,80,0.5)]">
+                                BEST VALUE</div>
+                            <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 blur-[60px] rounded-full">
+                            </div>
+                            <div class="text-center border-b border-primary/20 pb-6 mb-6 relative z-10">
+                                <div
+                                    class="w-16 h-16 mx-auto rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center mb-4 text-primary relative">
+                                    <span class="absolute w-full h-full animate-ping bg-primary/20 rounded-xl"></span>
+                                    <span class="material-symbols-outlined text-3xl">diamond</span>
+                                </div>
+                                <h3
+                                    class="text-2xl font-black text-primary font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_15px_rgba(242,202,80,0.6)]">
+                                    LEGEND</h3>
+                                <div class="flex justify-center items-end gap-1">
+                                    <p class="text-zinc-500 line-through font-tech text-sm">$149.99</p>
+                                    <p
+                                        class="text-xl font-bold text-white font-minecraft drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
+                                        $104.99</p>
+                                </div>
+                            </div>
+                            <ul class="flex-grow space-y-3 mb-8 relative z-10">
+                                <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
+                                        class="material-symbols-outlined text-primary text-base shrink-0">star</span>
+                                    Gold
+                                    [LEGEND] Prefix</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
+                                        class="material-symbols-outlined text-primary text-base shrink-0">star</span> 7x
+                                    Coin
+                                    Multiplier</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
+                                        class="material-symbols-outlined text-primary text-base shrink-0">star</span>
+                                    Custom
+                                    Login Message</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
+                                        class="material-symbols-outlined text-primary text-base shrink-0">star</span>
+                                    Private
+                                    Game Hosting</li>
+                                <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
+                                        class="material-symbols-outlined text-primary text-base shrink-0">star</span>
+                                    All
+                                    Previous Perks</li>
+                            </ul>
+                            <button onclick="addToCart('Legend Rank')"
+                                class="button-shine w-full py-4 bg-primary text-on-primary rounded-xl font-black text-sm tracking-widest uppercase font-tech flex justify-center items-center gap-2 relative z-10 shadow-[0_0_15px_rgba(242,202,80,0.3)]">
+                                <span class="material-symbols-outlined text-sm">shopping_cart_checkout</span> Add to
+                                Cart
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Mystery Crates & Keys -->
+                <section id="mystery-crates"
+                    class="category-content hidden mb-stack-lg border-t border-white/5 pt-stack-lg">
+                    <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
                         <div>
-                            <span
-                                class="px-3 py-1 bg-red-500/20 text-red-400 text-[10px] font-black uppercase rounded tracking-widest mb-2 inline-block font-tech border border-red-500/30">Ends
-                                in 24 Hours</span>
                             <h2
-                                class="text-2xl sm:text-3xl font-black text-white font-minecraft uppercase italic tracking-tighter">
-                                Summer Flash Sale</h2>
-                            <p class="text-zinc-400 font-tech text-sm mt-1">Get an automatic <strong
-                                    class="text-white">30% OFF</strong> all Ranks and Rank Upgrades at checkout.</p>
+                                class="text-2xl sm:text-3xl font-black text-white uppercase italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                                Mystery Crates</h2>
+                            <p class="text-zinc-400 text-sm font-tech">Unlock exclusive cosmetics, gadgets, and rare
+                                pets.</p>
                         </div>
+                        <button
+                            class="flex items-center gap-2 text-primary font-bold text-xs uppercase hover:gap-3 transition-all font-tech">
+                            View Drop Rates <span class="material-symbols-outlined text-sm">assessment</span>
+                        </button>
                     </div>
-                    <div class="flex flex-col items-center shrink-0">
-                        <p class="text-3xl font-black text-red-500 font-minecraft italic">-30%</p>
-                        <p class="text-[10px] text-zinc-500 font-tech uppercase tracking-widest">Auto-applied</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Featured Ranks Section -->
-        <section class="mb-stack-lg">
-            <div class="text-center mb-10">
-                <h2
-                    class="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-widest italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
-                    Lifetime Ranks
-                </h2>
-                <p class="text-zinc-400 text-sm font-tech">One-time purchase. Permanent perks across the entire network.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- VIP Rank -->
-                <div
-                    class="store-card glass-panel rounded-3xl p-6 border-zinc-500/30 flex flex-col h-full relative overflow-hidden">
-                    <div
-                        class="absolute top-0 right-0 bg-zinc-600 text-white px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
-                        LIFETIME</div>
-                    <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Rare Keys -->
                         <div
-                            class="w-16 h-16 mx-auto rounded-xl bg-zinc-500/10 flex items-center justify-center mb-4 text-zinc-400">
-                            <span class="material-symbols-outlined text-3xl">shield</span>
+                            class="store-card flex-col glass-panel rounded-2xl p-6 border-white/10 flex items-center gap-6">
+                            <div
+                                class="w-20 h-20 shrink-0 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center relative group">
+                                <div
+                                    class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                                </div>
+                                <span class="material-symbols-outlined text-4xl text-blue-400 relative z-10">key</span>
+                            </div>
+                            <div class="w-full">
+                                <h3 class="text-xl font-bold text-white mb-1 font-minecraft">5x Rare Keys</h3>
+                                <p class="text-primary font-bold font-minecraft mb-3">$4.99</p>
+                                <button onclick="addToCart('5x Rare Keys')"
+                                    class="w-full py-2 glass-panel hover:bg-white/10 rounded-lg text-xs font-bold text-white uppercase font-tech transition-all">Add
+                                    to Cart</button>
+                            </div>
                         </div>
-                        <h3
-                            class="text-2xl font-black text-white font-minecraft italic uppercase tracking-tighter mb-1">
-                            VIP</h3>
-                        <div class="flex justify-center items-end gap-1">
-                            <p class="text-zinc-500 line-through font-tech text-sm">$14.99</p>
-                            <p class="text-xl font-bold text-primary font-minecraft">$10.49</p>
-                        </div>
-                    </div>
-                    <ul class="flex-grow space-y-3 mb-8">
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
-                            White [VIP] Prefix</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
-                            2x Coin Multiplier</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span>
-                            Skip Server Queue</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-zinc-500 text-base shrink-0">check_circle</span> 5
-                            Wardrobe Slots</li>
-                    </ul>
-                    <button onclick="addToCart('VIP Rank')"
-                        class="w-full py-3 glass-panel hover:bg-zinc-500/20 rounded-xl font-bold text-sm text-white border-zinc-500/30 transition-all uppercase font-tech flex justify-center items-center gap-2">
-                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
-                    </button>
-                </div>
 
-                <!-- MVP Rank -->
-                <div
-                    class="store-card glass-panel rounded-3xl p-6 border-tertiary/30 flex flex-col h-full relative overflow-hidden">
-                    <div
-                        class="absolute top-0 right-0 bg-tertiary text-on-tertiary px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
-                        LIFETIME</div>
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-tertiary/10 blur-[50px] rounded-full"></div>
-                    <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                        <!-- Epic Keys -->
                         <div
-                            class="w-16 h-16 mx-auto rounded-xl bg-tertiary/10 flex items-center justify-center mb-4 text-tertiary">
-                            <span class="material-symbols-outlined text-3xl">verified</span>
+                            class="store-card flex-col glass-panel rounded-2xl p-6 border-purple-500/30 flex items-center gap-6">
+                            <div
+                                class="w-20 h-20 shrink-0 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center relative group">
+                                <div
+                                    class="absolute inset-0 bg-purple-500/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-4xl text-purple-400 relative z-10">key</span>
+                            </div>
+                            <div class="w-full">
+                                <h3
+                                    class="text-xl font-bold text-white mb-1 font-minecraft drop-shadow-[0_0_5px_rgba(168,85,247,0.4)]">
+                                    5x Epic Keys</h3>
+                                <p class="text-primary font-bold font-minecraft mb-3">$9.99</p>
+                                <button onclick="addToCart('5x Epic Keys')"
+                                    class="w-full py-2 glass-panel hover:bg-purple-500/20 rounded-lg text-xs font-bold text-white uppercase font-tech transition-all border-purple-500/40">Add
+                                    to Cart</button>
+                            </div>
                         </div>
-                        <h3
-                            class="text-2xl font-black text-tertiary font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_10px_rgba(159,216,228,0.4)]">
-                            MVP</h3>
-                        <div class="flex justify-center items-end gap-1">
-                            <p class="text-zinc-500 line-through font-tech text-sm">$34.99</p>
-                            <p class="text-xl font-bold text-primary font-minecraft">$24.49</p>
-                        </div>
-                    </div>
-                    <ul class="flex-grow space-y-3 mb-8 relative z-10">
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
-                            Blue [MVP] Prefix</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
-                            3x Coin Multiplier</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
-                            Fly in Lobbies</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
-                            Access to /nick</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-tertiary text-base shrink-0">check_circle</span>
-                            All VIP Perks</li>
-                    </ul>
-                    <button onclick="addToCart('MVP Rank')"
-                        class="w-full py-3 glass-panel hover:bg-tertiary/20 rounded-xl font-bold text-sm text-white border-tertiary/30 transition-all uppercase font-tech flex justify-center items-center gap-2 relative z-10">
-                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
-                    </button>
-                </div>
 
-                <!-- Titan Rank -->
-                <div
-                    class="store-card glass-panel rounded-3xl p-6 border-red-500/40 flex flex-col h-full relative overflow-hidden">
-                    <div
-                        class="absolute top-0 right-0 bg-red-500 text-white px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-lg">
-                        LIFETIME</div>
-                    <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-500/10 blur-[50px] rounded-full"></div>
-                    <div class="text-center border-b border-white/10 pb-6 mb-6 relative z-10">
+                        <!-- Legendary Keys -->
                         <div
-                            class="w-16 h-16 mx-auto rounded-xl bg-red-500/10 flex items-center justify-center mb-4 text-red-500">
-                            <span class="material-symbols-outlined text-3xl">local_fire_department</span>
+                            class="store-card flex-col glass-panel rounded-2xl p-6 border-primary/40 flex items-center gap-6 relative overflow-hidden">
+                            <div
+                                class="absolute -right-10 -bottom-10 w-32 h-32 bg-primary/20 blur-[40px] rounded-full pointer-events-none">
+                            </div>
+                            <div
+                                class="w-20 h-20 shrink-0 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center relative group">
+                                <div
+                                    class="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                                </div>
+                                <span
+                                    class="material-symbols-outlined text-4xl text-primary relative z-10">vpn_key</span>
+                            </div>
+                            <div class="w-full relative z-10">
+                                <h3
+                                    class="text-xl font-bold text-primary mb-1 font-minecraft drop-shadow-[0_0_8px_rgba(242,202,80,0.5)]">
+                                    5x Legend Keys</h3>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span
+                                        class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded font-tech font-bold border border-primary/30">+1
+                                        Bonus Key</span>
+                                    <p class="text-white font-bold font-minecraft">$19.99</p>
+                                </div>
+                                <button onclick="addToCart('5x Legend Keys')"
+                                    class="w-full py-2 bg-primary/10 hover:bg-primary/30 rounded-lg text-xs font-bold text-primary uppercase font-tech transition-all border border-primary/40">Add
+                                    to Cart</button>
+                            </div>
                         </div>
-                        <h3
-                            class="text-2xl font-black text-red-500 font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_10px_rgba(239,68,68,0.4)]">
-                            TITAN</h3>
-                        <div class="flex justify-center items-end gap-1">
-                            <p class="text-zinc-500 line-through font-tech text-sm">$74.99</p>
-                            <p class="text-xl font-bold text-primary font-minecraft">$52.49</p>
-                        </div>
-                    </div>
-                    <ul class="flex-grow space-y-3 mb-8 relative z-10">
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
-                            Red [TITAN] Prefix</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span> 5x
-                            Coin Multiplier</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
-                            Auto-Join Full Games</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
-                            Create Custom Guilds</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-300 font-tech"><span
-                                class="material-symbols-outlined text-red-500 text-base shrink-0">check_circle</span>
-                            Animated Gadgets</li>
-                    </ul>
-                    <button onclick="addToCart('Titan Rank')"
-                        class="w-full py-3 glass-panel hover:bg-red-500/20 rounded-xl font-bold text-sm text-white border-red-500/40 transition-all uppercase font-tech flex justify-center items-center gap-2 relative z-10">
-                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
-                    </button>
-                </div>
 
-                <!-- Legend Rank -->
-                <div
-                    class="store-card glass-panel rounded-3xl p-6 border-primary pixelated-border gold-glow flex flex-col h-full relative overflow-hidden transform md:-translate-y-2">
-                    <div class="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent pointer-events-none">
-                    </div>
-                    <div
-                        class="absolute top-0 right-0 bg-primary text-black px-3 py-1 text-[10px] font-black uppercase font-tech rounded-bl-xl z-20 shadow-[0_0_10px_rgba(242,202,80,0.5)]">
-                        BEST VALUE</div>
-                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-primary/20 blur-[60px] rounded-full"></div>
-                    <div class="text-center border-b border-primary/20 pb-6 mb-6 relative z-10">
+                        <!-- Ultimate Keys (Added) -->
                         <div
-                            class="w-16 h-16 mx-auto rounded-xl bg-primary/20 border border-primary/30 flex items-center justify-center mb-4 text-primary relative">
-                            <span class="absolute w-full h-full animate-ping bg-primary/20 rounded-xl"></span>
-                            <span class="material-symbols-outlined text-3xl">diamond</span>
+                            class="store-card flex-col glass-panel rounded-2xl p-6 border-red-500/30 flex items-center gap-6">
+                            <div
+                                class="w-20 h-20 shrink-0 rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center relative group">
+                                <div
+                                    class="absolute inset-0 bg-red-500/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                                </div>
+                                <span class="material-symbols-outlined text-4xl text-red-400 relative z-10">key</span>
+                            </div>
+                            <div class="w-full">
+                                <h3 class="text-xl font-bold text-white mb-1 font-minecraft">10x Ultimate Keys</h3>
+                                <p class="text-primary font-bold font-minecraft mb-3">$34.99</p>
+                                <button onclick="addToCart('10x Ultimate Keys')"
+                                    class="w-full py-2 glass-panel hover:bg-red-500/20 rounded-lg text-xs font-bold text-white uppercase font-tech transition-all border-red-500/40">Add
+                                    to Cart</button>
+                            </div>
                         </div>
-                        <h3
-                            class="text-2xl font-black text-primary font-minecraft italic uppercase tracking-tighter mb-1 drop-shadow-[0_0_15px_rgba(242,202,80,0.6)]">
-                            LEGEND</h3>
-                        <div class="flex justify-center items-end gap-1">
-                            <p class="text-zinc-500 line-through font-tech text-sm">$149.99</p>
-                            <p
-                                class="text-xl font-bold text-white font-minecraft drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
-                                $104.99</p>
+
+                    </div>
+                </section>
+
+                <!-- Network Coins -->
+                <section id="network-coins" class="category-content hidden mb-stack-lg">
+                    <div class="text-center mb-10">
+                        <h2
+                            class="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-widest italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                            Network Coins
+                        </h2>
+                        <p class="text-zinc-400 text-sm font-tech">Instant coin bundles for quick progression and rank
+                            upgrades.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">500 Coins</h3>
+                            <p class="text-sm text-zinc-400 mb-6 font-tech">Perfect for early-game tools and small
+                                upgrades.</p>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$2.49</p>
+                            <button onclick="addToCart('500 Coins')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">1,200 Coins</h3>
+                            <p class="text-sm text-zinc-400 mb-6 font-tech">A strong boost for mid-game item
+                                progression.</p>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$9.99</p>
+                            <button onclick="addToCart('1200 Coins')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">3,500 Coins</h3>
+                            <p class="text-sm text-zinc-400 mb-6 font-tech">Best value for ranking up fast and buying
+                                rare gear.</p>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$24.99</p>
+                            <button onclick="addToCart('3500 Coins')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <!-- 7500 Coins (Added) -->
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">7,500 Coins</h3>
+                            <p class="text-sm text-zinc-400 mb-6 font-tech">The ultimate coin package for top-tier
+                                players.</p>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$44.99</p>
+                            <button onclick="addToCart('7500 Coins')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
                         </div>
                     </div>
-                    <ul class="flex-grow space-y-3 mb-8 relative z-10">
-                        <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
-                                class="material-symbols-outlined text-primary text-base shrink-0">star</span> Gold
-                            [LEGEND] Prefix</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
-                                class="material-symbols-outlined text-primary text-base shrink-0">star</span> 7x Coin
-                            Multiplier</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
-                                class="material-symbols-outlined text-primary text-base shrink-0">star</span> Custom
-                            Login Message</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
-                                class="material-symbols-outlined text-primary text-base shrink-0">star</span> Private
-                            Game Hosting</li>
-                        <li class="flex items-start gap-2 text-sm text-zinc-100 font-tech font-medium"><span
-                                class="material-symbols-outlined text-primary text-base shrink-0">star</span> All
-                            Previous Perks</li>
-                    </ul>
-                    <button onclick="addToCart('Legend Rank')"
-                        class="button-shine w-full py-4 bg-primary text-on-primary rounded-xl font-black text-sm tracking-widest uppercase font-tech flex justify-center items-center gap-2 relative z-10 shadow-[0_0_15px_rgba(242,202,80,0.3)]">
-                        <span class="material-symbols-outlined text-sm">shopping_cart_checkout</span> Add to Cart
-                    </button>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <!-- Mystery Crates & Keys -->
-        <section class="mb-stack-lg border-t border-white/5 pt-stack-lg">
-            <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
-                <div>
-                    <h2
-                        class="text-2xl sm:text-3xl font-black text-white uppercase italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
-                        Mystery Crates</h2>
-                    <p class="text-zinc-400 text-sm font-tech">Unlock exclusive cosmetics, gadgets, and rare pets.</p>
-                </div>
-                <button
-                    class="flex items-center gap-2 text-primary font-bold text-xs uppercase hover:gap-3 transition-all font-tech">
-                    View Drop Rates <span class="material-symbols-outlined text-sm">assessment</span>
-                </button>
-            </div>
+                <!-- Special Bundles -->
+                <section id="special-bundles" class="category-content hidden mb-stack-lg">
+                    <div class="text-center mb-10">
+                        <h2
+                            class="text-3xl md:text-4xl font-black text-white mb-2 uppercase tracking-widest italic font-minecraft drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]">
+                            Special Bundles
+                        </h2>
+                        <p class="text-zinc-400 text-sm font-tech">Bundles with cosmetics, keys, and bonus perks for
+                            every player.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">Starter Bundle</h3>
+                            <ul class="space-y-2 text-sm text-zinc-300 font-tech mb-6">
+                                <li>1x Rare Key</li>
+                                <li>500 Coins</li>
+                                <li>VIP Prefix</li>
+                            </ul>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$12.99</p>
+                            <button onclick="addToCart('Starter Bundle')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">Builder Bundle</h3>
+                            <ul class="space-y-2 text-sm text-zinc-300 font-tech mb-6">
+                                <li>1x Epic Key</li>
+                                <li>1,200 Coins</li>
+                                <li>Builder Hat</li>
+                            </ul>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$19.99</p>
+                            <button onclick="addToCart('Builder Bundle')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">Season Pass</h3>
+                            <ul class="space-y-2 text-sm text-zinc-300 font-tech mb-6">
+                                <li>2x Coin Boost</li>
+                                <li>Exclusive Titles</li>
+                                <li>Early crate access</li>
+                            </ul>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$29.99</p>
+                            <button onclick="addToCart('Season Pass')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                        <!-- Ultimate Bundle (Added) -->
+                        <div class="store-card glass-panel rounded-3xl p-6 border-white/10 relative overflow-hidden">
+                            <h3 class="text-2xl font-bold text-white mb-4 font-minecraft">Ultimate Bundle</h3>
+                            <ul class="space-y-2 text-sm text-zinc-300 font-tech mb-6">
+                                <li>5x Legend Keys</li>
+                                <li>7,500 Coins</li>
+                                <li>Exclusive Pet</li>
+                            </ul>
+                            <p class="text-primary font-black text-3xl font-minecraft mb-6">$49.99</p>
+                            <button onclick="addToCart('Ultimate Bundle')"
+                                class="w-full py-3 rounded-xl bg-primary text-on-primary uppercase text-xs font-bold tracking-widest font-tech">Add
+                                to Cart</button>
+                        </div>
+                    </div>
+                </section>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Rare Keys -->
-                <div class="store-card glass-panel rounded-2xl p-6 border-white/10 flex items-center gap-6">
+                <!-- Secure Checkout & Payment info -->
+                <section
+                    class="glass-panel rounded-3xl p-8 md:p-12 border-white/5 bg-zinc-950/60 mb-stack-lg relative overflow-hidden">
                     <div
-                        class="w-20 h-20 shrink-0 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center relative group">
+                        class="absolute left-0 top-0 w-2 h-full bg-gradient-to-b from-primary via-secondary to-tertiary">
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-10">
+                        <div class="max-w-xl text-center md:text-left">
+                            <h2 class="text-2xl md:text-3xl font-black text-white uppercase italic font-minecraft mb-4">
+                                Secure
+                                Checkout</h2>
+                            <p class="text-zinc-400 font-tech text-sm leading-relaxed mb-6">
+                                We process all payments through secure, industry-standard gateways. Payments take
+                                roughly 1-5
+                                minutes to process and apply directly to your in-game account automatically.
+                                No account registration required beyond your Minecraft username.
+                            </p>
+                            <div class="flex flex-wrap justify-center md:justify-start gap-3">
+                                <span
+                                    class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">credit_card</span> Stripe /
+                                    Cards</span>
+                                <span
+                                    class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">account_balance_wallet</span>
+                                    PayPal</span>
+                                <span
+                                    class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
+                                        class="material-symbols-outlined text-sm">lock</span> 256-bit SSL Secure</span>
+                            </div>
+                        </div>
+
                         <div
-                            class="absolute inset-0 bg-blue-500/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                            class="w-full md:w-auto p-6 glass-panel rounded-2xl border-white/5 flex flex-col items-center text-center shrink-0">
+                            <div
+                                class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-4">
+                                <span class="material-symbols-outlined text-3xl">verified_user</span>
+                            </div>
+                            <h4 class="text-white font-bold font-tech uppercase tracking-widest text-sm mb-1">EULA
+                                Compliant
+                            </h4>
+                            <p class="text-[10px] text-zinc-500 font-tech max-w-[200px]">We strictly adhere to Mojang's
+                                EULA
+                                guidelines.</p>
                         </div>
-                        <span class="material-symbols-outlined text-4xl text-blue-400 relative z-10">key</span>
                     </div>
-                    <div class="w-full">
-                        <h3 class="text-xl font-bold text-white mb-1 font-minecraft">5x Rare Keys</h3>
-                        <p class="text-primary font-bold font-minecraft mb-3">$4.99</p>
-                        <button onclick="addToCart('5x Rare Keys')"
-                            class="w-full py-2 glass-panel hover:bg-white/10 rounded-lg text-xs font-bold text-white uppercase font-tech transition-all">Add
-                            to Cart</button>
-                    </div>
-                </div>
+                </section>
 
-                <!-- Epic Keys -->
-                <div class="store-card glass-panel rounded-2xl p-6 border-purple-500/30 flex items-center gap-6">
-                    <div
-                        class="w-20 h-20 shrink-0 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center relative group">
-                        <div
-                            class="absolute inset-0 bg-purple-500/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                <!-- Payment FAQ -->
+                <section class="max-w-4xl mx-auto mb-stack-lg">
+                    <div class="text-center mb-8">
+                        <h2
+                            class="text-xl md:text-2xl font-black text-white uppercase tracking-widest italic font-minecraft">
+                            Purchase Support</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="glass-panel p-5 rounded-xl border-white/5">
+                            <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">I bought a rank, where
+                                is it?
+                            </h4>
+                            <p class="text-xs text-zinc-400 font-tech leading-relaxed">Purchases usually take between 1
+                                to 5
+                                minutes to process. If you are in-game, please try relogging. If it has been over 30
+                                minutes,
+                                please open a support ticket on our Discord.</p>
                         </div>
-                        <span class="material-symbols-outlined text-4xl text-purple-400 relative z-10">key</span>
-                    </div>
-                    <div class="w-full">
-                        <h3
-                            class="text-xl font-bold text-white mb-1 font-minecraft drop-shadow-[0_0_5px_rgba(168,85,247,0.4)]">
-                            5x Epic Keys</h3>
-                        <p class="text-primary font-bold font-minecraft mb-3">$9.99</p>
-                        <button onclick="addToCart('5x Epic Keys')"
-                            class="w-full py-2 glass-panel hover:bg-purple-500/20 rounded-lg text-xs font-bold text-white uppercase font-tech transition-all border-purple-500/40">Add
-                            to Cart</button>
-                    </div>
-                </div>
-
-                <!-- Legendary Keys -->
-                <div
-                    class="store-card glass-panel rounded-2xl p-6 border-primary/40 flex items-center gap-6 relative overflow-hidden">
-                    <div
-                        class="absolute -right-10 -bottom-10 w-32 h-32 bg-primary/20 blur-[40px] rounded-full pointer-events-none">
-                    </div>
-                    <div
-                        class="w-20 h-20 shrink-0 rounded-xl bg-primary/10 border border-primary/40 flex items-center justify-center relative group">
-                        <div
-                            class="absolute inset-0 bg-primary/20 blur-xl rounded-full scale-0 group-hover:scale-100 transition-transform">
+                        <div class="glass-panel p-5 rounded-xl border-white/5">
+                            <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">Can I upgrade my rank
+                                later?
+                            </h4>
+                            <p class="text-xs text-zinc-400 font-tech leading-relaxed">Yes! If you purchase VIP now and
+                                want MVP
+                                later, the store will automatically deduct the price you already paid for VIP at
+                                checkout.</p>
                         </div>
-                        <span class="material-symbols-outlined text-4xl text-primary relative z-10">vpn_key</span>
-                    </div>
-                    <div class="w-full relative z-10">
-                        <h3
-                            class="text-xl font-bold text-primary mb-1 font-minecraft drop-shadow-[0_0_8px_rgba(242,202,80,0.5)]">
-                            5x Legend Keys</h3>
-                        <div class="flex items-center gap-2 mb-3">
-                            <span
-                                class="text-[10px] bg-primary/20 text-primary px-2 py-0.5 rounded font-tech font-bold border border-primary/30">+1
-                                Bonus Key</span>
-                            <p class="text-white font-bold font-minecraft">$19.99</p>
+                        <div class="glass-panel p-5 rounded-xl border-white/5">
+                            <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">What is the refund
+                                policy?</h4>
+                            <p class="text-xs text-zinc-400 font-tech leading-relaxed">All purchases are final and
+                                non-refundable since they are digital virtual items. Chargebacks or disputes will result
+                                in an
+                                automatic permanent ban from the network.</p>
                         </div>
-                        <button onclick="addToCart('5x Legend Keys')"
-                            class="w-full py-2 bg-primary/10 hover:bg-primary/30 rounded-lg text-xs font-bold text-primary uppercase font-tech transition-all border border-primary/40">Add
-                            to Cart</button>
+                        <div class="glass-panel p-5 rounded-xl border-white/5">
+                            <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">Can I buy a rank for a
+                                friend?
+                            </h4>
+                            <p class="text-xs text-zinc-400 font-tech leading-relaxed">Yes. Simply click the "Logout"
+                                button on
+                                the store if you are logged in, and enter your friend's exact Minecraft username when
+                                prompted.
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </section>
             </div>
-        </section>
-
-        <!-- Secure Checkout & Payment info -->
-        <section
-            class="glass-panel rounded-3xl p-8 md:p-12 border-white/5 bg-zinc-950/60 mb-stack-lg relative overflow-hidden">
-            <div class="absolute left-0 top-0 w-2 h-full bg-gradient-to-b from-primary via-secondary to-tertiary"></div>
-            <div class="flex flex-col md:flex-row items-center justify-between gap-10">
-                <div class="max-w-xl text-center md:text-left">
-                    <h2 class="text-2xl md:text-3xl font-black text-white uppercase italic font-minecraft mb-4">Secure
-                        Checkout</h2>
-                    <p class="text-zinc-400 font-tech text-sm leading-relaxed mb-6">
-                        We process all payments through secure, industry-standard gateways. Payments take roughly 1-5
-                        minutes to process and apply directly to your in-game account automatically.
-                        No account registration required beyond your Minecraft username.
-                    </p>
-                    <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                        <span
-                            class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm">credit_card</span> Stripe / Cards</span>
-                        <span
-                            class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm">account_balance_wallet</span> PayPal</span>
-                        <span
-                            class="px-4 py-2 glass-panel rounded-lg border-white/10 text-xs font-bold text-zinc-300 font-tech flex items-center gap-2"><span
-                                class="material-symbols-outlined text-sm">lock</span> 256-bit SSL Secure</span>
+            <aside class="hidden lg:block sticky top-28 space-y-6 self-start">
+                <section class="glass-panel rounded-3xl border border-white/10 p-6 space-y-5">
+                    <div class="flex items-center justify-between gap-4">
+                        <div>
+                            <p class="text-sm uppercase font-tech tracking-[0.3em] text-zinc-400">Cart Summary</p>
+                            <h2 class="text-2xl font-black text-white font-minecraft">Your Bag</h2>
+                        </div>
+                        <div class="text-sm text-zinc-400">
+                            <span id="cart-count">0</span> items
+                        </div>
                     </div>
-                </div>
-
-                <div
-                    class="w-full md:w-auto p-6 glass-panel rounded-2xl border-white/5 flex flex-col items-center text-center shrink-0">
-                    <div
-                        class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-4">
-                        <span class="material-symbols-outlined text-3xl">verified_user</span>
+                    <p id="cart-item-count" class="text-xs text-zinc-400 font-tech">0 items in cart</p>
+                    <div class="rounded-3xl bg-zinc-950/80 border border-white/5 p-4">
+                        <ul id="cart-items" class="space-y-3">
+                            <li class="text-sm text-zinc-400 font-tech">Your cart is empty. Add an item to begin
+                                checkout.</li>
+                        </ul>
                     </div>
-                    <h4 class="text-white font-bold font-tech uppercase tracking-widest text-sm mb-1">EULA Compliant
-                    </h4>
-                    <p class="text-[10px] text-zinc-500 font-tech max-w-[200px]">We strictly adhere to Mojang's EULA
-                        guidelines.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Payment FAQ -->
-        <section class="max-w-4xl mx-auto mb-stack-lg">
-            <div class="text-center mb-8">
-                <h2 class="text-xl md:text-2xl font-black text-white uppercase tracking-widest italic font-minecraft">
-                    Purchase Support</h2>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="glass-panel p-5 rounded-xl border-white/5">
-                    <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">I bought a rank, where is it?
-                    </h4>
-                    <p class="text-xs text-zinc-400 font-tech leading-relaxed">Purchases usually take between 1 to 5
-                        minutes to process. If you are in-game, please try relogging. If it has been over 30 minutes,
-                        please open a support ticket on our Discord.</p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl border-white/5">
-                    <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">Can I upgrade my rank later?
-                    </h4>
-                    <p class="text-xs text-zinc-400 font-tech leading-relaxed">Yes! If you purchase VIP now and want MVP
-                        later, the store will automatically deduct the price you already paid for VIP at checkout.</p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl border-white/5">
-                    <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">What is the refund policy?</h4>
-                    <p class="text-xs text-zinc-400 font-tech leading-relaxed">All purchases are final and
-                        non-refundable since they are digital virtual items. Chargebacks or disputes will result in an
-                        automatic permanent ban from the network.</p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl border-white/5">
-                    <h4 class="text-sm font-bold text-primary mb-2 font-tech uppercase">Can I buy a rank for a friend?
-                    </h4>
-                    <p class="text-xs text-zinc-400 font-tech leading-relaxed">Yes. Simply click the "Logout" button on
-                        the store if you are logged in, and enter your friend's exact Minecraft username when prompted.
-                    </p>
-                </div>
-            </div>
-        </section>
+                    <div class="space-y-2 text-sm font-tech text-zinc-400">
+                        <div class="flex items-center justify-between">
+                            <span>Subtotal</span>
+                            <span id="cart-total">$0.00</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span>Estimated Total</span>
+                            <span id="cart-total-amount">$0.00</span>
+                        </div>
+                        <div class="flex items-center justify-between font-bold text-white">
+                            <span>Grand Total</span>
+                            <span id="cart-grand-total">$0.00</span>
+                        </div>
+                    </div>
+                    <button id="checkout-button" onclick="checkoutCart()" disabled
+                        class="w-full py-3 rounded-2xl bg-primary text-black font-bold uppercase tracking-[0.25em] text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Checkout</button>
+                </section>
+                <section class="glass-panel rounded-3xl border border-white/10 p-5 space-y-4">
+                    <h3 class="text-sm uppercase tracking-[0.3em] text-zinc-400 font-tech">Need help?</h3>
+                    <p class="text-xs text-zinc-400 leading-relaxed">If your purchase doesn't apply automatically,
+                        refresh the page in Minecraft or contact support.</p>
+                    <a href="support.html"
+                        class="inline-flex items-center justify-center w-full py-3 rounded-2xl border border-white/10 text-xs font-bold uppercase tracking-[0.3em] text-white hover:bg-white/5">Visit
+                        Support</a>
+                </section>
+            </aside>
+        </div>
 
     </main>
 
@@ -738,15 +1021,15 @@
             </div>
             <div class="flex flex-wrap justify-center gap-6 md:gap-8">
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Privacy Policy</a>
+                    href="privacy.html">Privacy Policy</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Terms of Service</a>
+                    href="terms.html">Terms of Service</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Support</a>
+                    href="support.html">Support</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Staff Applications</a>
+                    href="staff.html">Staff Applications</a>
                 <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
-                    href="#">Contact</a>
+                    href="contact.html">Contact</a>
             </div>
             <div class="flex gap-4">
                 <div
@@ -841,24 +1124,172 @@
         </div>
     </div>
 
-    <style>
-        @keyframes progress {
-            from {
-                width: 100%;
-            }
 
-            to {
-                width: 0%;
-            }
-        }
-    </style>
+    <!-- Mobile Floating Cart Button -->
+    <button id="mobile-cart-fab" onclick="toggleMobileCart(true)"
+        class="lg:hidden fixed bottom-24 right-6 z-[60] w-14 h-14 bg-primary text-black rounded-full shadow-[0_0_20px_rgba(242,202,80,0.4)] flex items-center justify-center transition-transform active:scale-90 hidden">
+        <span class="material-symbols-outlined">shopping_bag</span>
+        <span id="mobile-cart-count"
+            class="absolute -top-1 -right-1 bg-white text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-background">0</span>
+    </button>
+
+    <!-- Mobile Cart Drawer Overlay -->
+    <div id="mobile-cart-drawer"
+        class="lg:hidden fixed inset-0 z-[100] pointer-events-none transition-all duration-500">
+        <!-- Backdrop -->
+        <div id="cart-backdrop" onclick="toggleMobileCart(false)"
+            class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-500"></div>
+
+        <!-- Drawer Content -->
+        <div id="drawer-content"
+            class="absolute right-0 top-0 h-full w-[85%] max-w-sm bg-background border-l border-white/10 translate-x-full transition-transform duration-500 ease-out flex flex-col shadow-2xl">
+            <div class="p-6 border-b border-white/10 flex justify-between items-center bg-zinc-950/50">
+                <h2 class="font-minecraft text-white text-xl uppercase italic">Your Bag</h2>
+                <button onclick="toggleMobileCart(false)" class="text-zinc-400 hover:text-white">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <div class="flex-grow overflow-y-auto p-4">
+                <ul id="mobile-cart-items-list" class="space-y-4">
+                    <!-- Items injected here -->
+                </ul>
+            </div>
+
+            <div class="p-6 bg-zinc-950/80 border-t border-white/10 space-y-4">
+                <div class="flex justify-between text-zinc-400 font-tech uppercase text-xs tracking-widest">
+                    <span>Total Amount</span>
+                    <span id="mobile-cart-grand-total" class="text-white font-bold">$0.00</span>
+                </div>
+                <button onclick="checkoutCart()" id="mobile-checkout-btn"
+                    class="w-full py-4 bg-primary text-black font-black uppercase tracking-[0.2em] text-sm rounded-xl shadow-lg disabled:opacity-50">
+                    Checkout Now
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // Store-specific logic to simulate adding to cart
+        const storeCatalog = {
+            'VIP Rank': 10.49,
+            'MVP Rank': 24.49,
+            'Titan Rank': 52.49,
+            'Legend Rank': 104.99,
+            '5x Rare Keys': 4.99,
+            '5x Epic Keys': 9.99,
+            '5x Legend Keys': 19.99,
+            '10x Ultimate Keys': 34.99,
+            '500 Coins': 2.49,
+            '1200 Coins': 9.99,
+            '3500 Coins': 24.99,
+            '7500 Coins': 44.99,
+            'Starter Bundle': 12.99,
+            'Builder Bundle': 19.99,
+            'Season Pass': 29.99,
+            'Ultimate Bundle': 49.99
+        };
+
+        const cart = [];
+
         function addToCart(itemName) {
-            showNotification(itemName + " added");
-            // In a real Buycraft/Tebex theme, this would trigger an API call.
+            if (!storeCatalog[itemName]) {
+                showNotification('Item not found');
+                return;
+            }
+
+            cart.push({
+                name: itemName,
+                price: storeCatalog[itemName]
+            });
+            renderCart();
+            showNotification(itemName + ' added to cart');
         }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            renderCart();
+            showNotification('Item removed from cart');
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            const cartItemCount = document.getElementById('cart-item-count');
+            const cartTotalAmount = document.getElementById('cart-total-amount');
+            const cartGrandTotal = document.getElementById('cart-grand-total');
+            const checkoutButton = document.getElementById('checkout-button');
+
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            cartCount.innerText = cart.length;
+            cartTotal.innerText = `$${total.toFixed(2)}`;
+            cartItemCount.innerText = `${cart.length} item${cart.length === 1 ? '' : 's'}`;
+            cartTotalAmount.innerText = `$${total.toFixed(2)}`;
+            cartGrandTotal.innerText = `$${total.toFixed(2)}`;
+            checkoutButton.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<li class="text-sm text-zinc-400 font-tech">Your cart is empty. Add an item to begin checkout.</li>';
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <li class="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <div>
+                            <p class="text-sm font-bold text-white font-tech">${item.name}</p>
+                            <p class="text-xs text-zinc-400 font-tech">$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})"
+                            class="text-xs uppercase tracking-widest text-primary font-bold font-tech hover:text-white">Remove</button>
+                    </li>
+                `).join('');
+            }
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showNotification('No items in cart');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + item.price, 0).toFixed(2);
+            showNotification(`Ready to checkout $${total}`);
+        }
+
+        function selectCategory(category) {
+            // Fix for the previous classList.toggle error - split out the strings so they toggle correctly!
+            document.querySelectorAll('.category-tab').forEach(button => {
+                const isActive = button.dataset.category === category;
+
+                // Active CSS Classes
+                const activeClasses = ['bg-primary', 'text-black', 'shadow-[0_0_15px_rgba(242,202,80,0.3)]'];
+                // Inactive CSS Classes
+                const inactiveClasses = ['glass-panel', 'text-zinc-400', 'border-white/5', 'hover:text-white'];
+
+                if (isActive) {
+                    button.classList.add(...activeClasses);
+                    button.classList.remove(...inactiveClasses);
+                } else {
+                    button.classList.add(...inactiveClasses);
+                    button.classList.remove(...activeClasses);
+                }
+            });
+
+            document.querySelectorAll('.category-content').forEach(section => {
+                if (section.id === category) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+        }
+
+        document.querySelectorAll('[data-category]').forEach(button => {
+            button.addEventListener('click', () => selectCategory(button.dataset.category));
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            selectCategory('global-ranks');
+        });
 
         function showNotification(message) {
             const toast = document.getElementById('copy-toast');
@@ -879,6 +1310,76 @@
                 toast.classList.add('translate-y-20', 'hidden', 'pointer-events-none');
                 toast.classList.remove('translate-y-0', 'opacity-100');
             }, 3000);
+        }
+
+        function toggleMobileCart(isOpen) {
+            const drawer = document.getElementById('mobile-cart-drawer');
+            const backdrop = document.getElementById('cart-backdrop');
+            const content = document.getElementById('drawer-content');
+
+            if (isOpen) {
+                drawer.classList.remove('pointer-events-none');
+                backdrop.classList.add('opacity-100');
+                content.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('pointer-events-none');
+                backdrop.classList.remove('opacity-100');
+                content.classList.add('translate-x-full');
+            }
+        }
+
+        function renderCart() {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            const totalFormatted = `$${total.toFixed(2)}`;
+
+            // Desktop Elements
+            const cartItems = document.getElementById('cart-items');
+            const cartCount = document.getElementById('cart-count');
+            const cartTotal = document.getElementById('cart-total');
+            const cartItemCount = document.getElementById('cart-item-count');
+            const cartTotalAmount = document.getElementById('cart-total-amount');
+            const cartGrandTotal = document.getElementById('cart-grand-total');
+            const checkoutButton = document.getElementById('checkout-button');
+
+            // Mobile Elements
+            const mobileFab = document.getElementById('mobile-cart-fab');
+            const mobileCount = document.getElementById('mobile-cart-count');
+            const mobileItemsList = document.getElementById('mobile-cart-items-list');
+            const mobileGrandTotal = document.getElementById('mobile-cart-grand-total');
+            const mobileCheckoutBtn = document.getElementById('mobile-checkout-btn');
+
+            // Update Counts & Totals
+            [cartCount, mobileCount].forEach(el => el.innerText = cart.length);
+            [cartTotal, cartTotalAmount, cartGrandTotal, mobileGrandTotal].forEach(el => el.innerText = totalFormatted);
+            cartItemCount.innerText = `${cart.length} item${cart.length === 1 ? '' : 's'}`;
+
+            // Toggle Button States
+            checkoutButton.disabled = cart.length === 0;
+            mobileCheckoutBtn.disabled = cart.length === 0;
+
+            // Show/Hide Mobile FAB
+            if (cart.length > 0) {
+                mobileFab.classList.remove('hidden');
+            } else {
+                mobileFab.classList.add('hidden');
+                toggleMobileCart(false); // Close drawer if last item is removed
+            }
+
+            // Build Items HTML
+            const itemsHTML = cart.length === 0
+                ? '<li class="text-sm text-zinc-400 font-tech text-center py-10">Your cart is empty.</li>'
+                : cart.map((item, index) => `
+            <li class="flex items-center justify-between gap-3 p-4 rounded-2xl bg-white/5 border border-white/10">
+                <div>
+                    <p class="text-sm font-bold text-white font-tech">${item.name}</p>
+                    <p class="text-xs text-zinc-400 font-tech">$${item.price.toFixed(2)}</p>
+                </div>
+                <button onclick="removeFromCart(${index})" class="text-xs uppercase tracking-widest text-primary font-bold font-tech">Remove</button>
+            </li>
+        `).join('');
+
+            cartItems.innerHTML = itemsHTML;
+            mobileItemsList.innerHTML = itemsHTML;
         }
     </script>
 </body>

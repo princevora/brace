@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Hypixel Network</title>
+    <meta name="theme-color" content="#f2ca50" />
+    <link rel="icon" type="image/x-icon" href="logo.png">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style"
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Press+Start+2P&display=block">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;900&family=Inter:wght@400;500;600;700&family=Press+Start+2P&family=Orbitron:wght@700;900&family=Rajdhani:wght@500;700&display=block"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#f2ca50',
+                        background: '#131314',
+                        surface: '#1f1f20',
+                        'on-background': '#e5e2e3'
+                    },
+                    fontFamily: {
+                        body: ['Inter', 'sans-serif'],
+                        minecraft: ['Orbitron', 'sans-serif'],
+                        pixel: ['Press Start 2P', 'monospace'],
+                        tech: ['Rajdhani', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #f2ca50;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .header-gradient {
+            background: linear-gradient(to bottom, rgba(19, 19, 20, 0.8) 0%, rgba(19, 19, 20, 0) 100%);
+        }
+
+        .glass-panel {
+            backdrop-filter: blur(20px);
+            background: rgba(20, 20, 21, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .button-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: 0.5s;
+        }
+
+        .button-shine:hover::after {
+            left: 100%;
+            top: 100%;
+        }
+
+        .minecraft-heading {
+            font-family: 'Orbitron', sans-serif;
+            text-shadow: 3px 3px 0px rgba(0, 0, 0, 0.8), 0 0 30px rgba(242, 202, 80, 0.5);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body overflow-x-hidden pb-20 md:pb-0">
+    <div class="fixed inset-0 z-[-1] pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-background/90 to-background"></div>
+        <img loading="lazy" class="w-full h-full object-cover opacity-15 scale-105"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtqd6FsqeHQ8uhu02PguKF4aCm6EdTx-tO4Nu2EKHPmrRCckpQZOkPkXAk0Y4KXwDEeETuy4YKvBb_BjOD20T_FvOaJZ9iBvDGEz48WTNkHky6LC3aqjUTt6TGObmbK_GEKjmc3J8ThR1PA-ykuimMsRSKKjzMEVn8qqzBE_nDNJNcxC66mSRQh8Uw9n3Ql1vrBI-dUhtbsjWel5uHXw8ozr9pOYaqavKPF07K0PHfq_WFTOIy_SUj_-MoodsIA_iqoKdnR2ofvVk"
+            alt="Hypixel background" />
+    </div>
+
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-500">
+        <div class="absolute inset-0 h-32 header-gradient pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-4 relative">
+            <nav class="glass-panel flex items-center justify-between px-4 md:px-6 py-3 rounded-2xl border-white/5 shadow-2xl">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img loading="lazy" src="logo.png" class="h-8 md:h-10" alt="Logo">
+
+                </a>
+                <div class="hidden xl:flex items-center gap-6 header-nav">
+                    <a href="index.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                </div>
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="login.html" class="px-4 py-2 text-zinc-400 hover:text-white font-tech font-bold text-xs tracking-widest uppercase transition-colors">Login</a>
+                    <a href="register.html" class="px-4 py-2 bg-white/5 text-white border border-white/10 rounded-xl text-xs font-tech font-bold tracking-widest uppercase hover:bg-white/10 transition-colors">Register</a>
+                </div>
+                <button id="mobile-menu-toggle" class="xl:hidden p-2 rounded-2xl border border-white/10 text-white/80 hover:text-white" aria-label="Toggle navigation">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+            </nav>
+            <div id="mobile-menu" class="hidden absolute inset-x-4 top-full mt-3 rounded-3xl glass-panel p-4 border-white/10 shadow-2xl z-50 xl:hidden">
+                <div class="grid gap-2">
+                    <a href="index.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Home</a>
+                    <a href="store.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Store</a>
+                    <a href="features.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Play</a>
+                    <a href="vote.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Vote</a>
+                    <a href="forums.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Forums</a>
+                    <a href="wiki.html" class="nav-link text-white/70 hover:text-white font-tech font-bold text-sm tracking-widest uppercase">Wiki</a>
+                    <div class="pt-3 border-t border-white/10 mt-3 flex flex-col gap-2">
+                        <a href="login.html" class="px-4 py-3 bg-white/5 text-white rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-white/10">Login</a>
+                        <a href="register.html" class="px-4 py-3 bg-primary text-on-primary rounded-2xl text-xs font-tech font-bold uppercase tracking-widest text-center hover:bg-primary-fixed">Register</a>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const menu = document.getElementById('mobile-menu');
+                    const toggle = document.getElementById('mobile-menu-toggle');
+                    if (toggle && menu) {
+                        toggle.addEventListener('click', function () {
+                            menu.classList.toggle('hidden');
+                        });
+                    }
+
+                    const path = window.location.pathname.split('/').pop().toLowerCase() || 'index.html';
+                    const current = {
+                        '': 'index.html',
+                        'index.html': 'index.html',
+                        'store.html': 'store.html',
+                        'features.html': 'features.html',
+                        'vote.html': 'vote.html',
+                        'forums.html': 'forums.html',
+                        'forum-thread.html': 'forums.html',
+                        'wiki.html': 'wiki.html',
+                        'login.html': 'login.html',
+                        'register.html': 'register.html'
+                    }[path] || path;
+
+                    document.querySelectorAll('.header-nav a.nav-link, #mobile-menu a.nav-link').forEach(function (link) {
+                        if (link.getAttribute('href') === current) {
+                            link.classList.add('active', 'text-primary');
+                            link.classList.remove('text-white/70');
+                        } else {
+                            link.classList.remove('active', 'text-primary');
+                            link.classList.add('text-white/70');
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </header>
+
+    <main class="pt-32 px-4 md:px-gutter pb-stack-lg max-w-4xl mx-auto">
+        <section class="glass-panel rounded-[2rem] p-8 md:p-12 mt-10 md:mt-16 border-white/10 shadow-2xl">
+            <div class="text-center mb-10">
+                <span class="text-xs uppercase tracking-[0.3em] text-primary font-tech mb-4 inline-block">New Player Registration</span>
+                <h1 class="minecraft-heading text-4xl md:text-5xl text-white font-black mb-4">Create your account</h1>
+                <p class="text-zinc-400 text-sm md:text-base font-tech max-w-2xl mx-auto">Register now to unlock store benefits, participate in forums, and join the server faster.</p>
+            </div>
+
+            <form id="register-form" class="space-y-6" onsubmit="event.preventDefault(); submitRegister();">
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="space-y-3">
+                        <label class="text-xs uppercase tracking-widest text-zinc-500 font-tech">Minecraft Username</label>
+                        <input id="register-username" type="text" placeholder="Minecraft Username"
+                            class="w-full bg-zinc-950/80 border border-white/10 rounded-2xl px-5 py-4 text-white font-tech focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" required>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-xs uppercase tracking-widest text-zinc-500 font-tech">Email Address</label>
+                        <input id="register-email" type="email" placeholder="Email address"
+                            class="w-full bg-zinc-950/80 border border-white/10 rounded-2xl px-5 py-4 text-white font-tech focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" required>
+                    </div>
+                </div>
+                <div class="grid gap-6 sm:grid-cols-2">
+                    <div class="space-y-3">
+                        <label class="text-xs uppercase tracking-widest text-zinc-500 font-tech">Password</label>
+                        <input id="register-password" type="password" placeholder="Create a password"
+                            class="w-full bg-zinc-950/80 border border-white/10 rounded-2xl px-5 py-4 text-white font-tech focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" required>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="text-xs uppercase tracking-widest text-zinc-500 font-tech">Confirm Password</label>
+                        <input id="register-confirm" type="password" placeholder="Confirm password"
+                            class="w-full bg-zinc-950/80 border border-white/10 rounded-2xl px-5 py-4 text-white font-tech focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" required>
+                    </div>
+                </div>
+                <button type="submit"
+                    class="button-shine w-full py-4 bg-primary text-on-primary rounded-3xl uppercase tracking-widest font-bold font-tech text-sm hover:bg-primary-fixed transition-colors">Create Account</button>
+            </form>
+
+            <div class="mt-8 text-center text-zinc-400 text-sm font-tech">
+                <p>Already have an account? <a href="login.html" class="text-primary hover:text-primary-fixed">Sign in here</a></p>
+            </div>
+        </section>
+    </main>
+
+     <footer
+        class="w-full border-t border-white/10 mt-10 md:mt-20 bg-zinc-950/80 backdrop-blur-3xl pb-24 md:pb-0 relative z-40">
+        <div class="w-full px-6 md:px-16 py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <div
+                    class="text-xl font-black text-yellow-500 font-minecraft mb-4 flex justify-center md:justify-start">
+                    <img loading="lazy" src="logo.png"
+                        class="h-8 md:h-10 object-contain grayscale relative z-10 transition-transform" alt="Logo" />
+                </div>
+                <p class="font-tech text-[10px] md:text-xs uppercase tracking-widest text-zinc-500">© 2026 Hypixel
+                    Network. Not an official Minecraft product.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6 md:gap-8">
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="terms.html">Terms of Service</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="support.html">Support</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="staff.html">Staff Applications</a>
+                <a class="text-zinc-500 hover:text-yellow-500 transition-colors font-tech text-[10px] md:text-xs uppercase tracking-widest"
+                    href="contact.html">Contact</a>
+            </div>
+            <div class="flex gap-4">
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="language">language</span>
+                </div>
+                <div
+                    class="w-10 h-10 glass-panel rounded-lg flex items-center justify-center hover:text-primary transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined" data-icon="policy">policy</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function submitRegister() {
+            const username = document.getElementById('register-username').value.trim();
+            const email = document.getElementById('register-email').value.trim();
+            const password = document.getElementById('register-password').value.trim();
+            const confirm = document.getElementById('register-confirm').value.trim();
+
+            if (!username || !email || !password || !confirm) {
+                alert('Please fill out all fields.');
+                return;
+            }
+            if (password !== confirm) {
+                alert('Passwords do not match.');
+                return;
+            }
+            alert('Registration successful!');
+        }
+    </script>
+</body>
+
+</html>
